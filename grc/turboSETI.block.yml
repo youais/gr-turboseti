@@ -1,0 +1,89 @@
+id: turboSETI
+label: turboSETI
+category: '[turboSETI]'
+
+# templates:
+#   imports: import turboseti
+#   make: turboseti.turboSETI(${none})
+
+#  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
+#     Sub-entries of dictionary:
+#     * id (makes the value accessible as \$keyname, e.g. in the make entry)
+#     * label
+#     * dtype
+
+parameters:
+- id: filesource
+  label: If input comes from file source
+  dtype: bool
+  default: false
+- id: filepath
+  label: File path
+  dtype: string
+- id: h5_filename
+  label: Name of .h5 file
+  dtype: string
+- id: dataset_name
+  label: Name of dataset
+  dtype: string
+- id: dat_filename
+  label: Name of .dat file
+  dtype: string
+- id: lst_filename
+  label: Name of .lst file
+  dtype: string
+- id: csv_filename
+  label: Name of .csv file
+  dtype: string
+- id: max_drift
+  label: Maximum drift rate
+  dtype: int
+- id: snr
+  label: Signal-to-noise ratio
+  dtype: int
+- id: out_dir
+  label: Directory where generated .dat, .lst, & .csv files are output
+  dtype: string
+- id: filter_threshold
+  label: Filter threshold (1, 2, 3)
+  dtype: int
+  default: '3'
+- id: user_validation
+  label: ?
+  dtype: bool
+  default: false
+- id: saving
+  label: ?
+  dtype: bool
+  default: true
+
+#  Make one 'inputs' list entry per input. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * domain
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs)
+inputs:
+- label: eh
+  domain: stream
+  dtype: ${ type.t }
+
+#  Make one 'outputs' list entry per output. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs)
+outputs:
+- optional: true #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+
+templates:
+    imports: import turboSETI
+    make: |-
+      turboSETI(${filesource}, ${filepath}, ${h5_filename}, ${dataset_name},
+      ${dat_filename}, ${lst_filename}, ${csv_filename}, ${max_drift},
+      ${snr}, ${out_dir}, ${filter_threshold}, ${user_validation}, ${saving})
+
+documentation: |-
+  This block runs a simple turboSETI analysis in GNU Radio.
+
+file_format: 1

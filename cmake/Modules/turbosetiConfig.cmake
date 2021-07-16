@@ -7,8 +7,8 @@ FIND_PATH(
     HINTS $ENV{TURBOSETI_DIR}/include
         ${PC_TURBOSETI_INCLUDEDIR}
     PATHS ${CMAKE_INSTALL_PREFIX}/include
-          /usr/local/include
-          /usr/include
+          /Applications/GNURadio.app/Contents/MacOS//usr/local/include
+          /Applications/GNURadio.app/Contents/MacOS/usr/include
 )
 
 FIND_LIBRARY(
@@ -18,10 +18,10 @@ FIND_LIBRARY(
         ${PC_TURBOSETI_LIBDIR}
     PATHS ${CMAKE_INSTALL_PREFIX}/lib
           ${CMAKE_INSTALL_PREFIX}/lib64
-          /usr/local/lib
-          /usr/local/lib64
-          /usr/lib
-          /usr/lib64
+          /Applications/GNURadio.app/Contents/MacOS/usr/local/lib
+          /Applications/GNURadio.app/Contents/MacOS/usr/local/lib64
+          /Applications/GNURadio.app/Contents/MacOS/usr/lib
+          /Applications/GNURadio.app/Contents/MacOS/usr/lib64
           )
 
 include("${CMAKE_CURRENT_LIST_DIR}/turbosetiTarget.cmake")

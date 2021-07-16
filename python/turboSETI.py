@@ -26,7 +26,7 @@ import h5py
 
 from gnuradio import gr
 from turbo_seti.find_doppler.find_doppler import FindDoppler
-from turbo_seti.find_event.find_event import make_table
+# from turbo_seti.find_event.find_event import make_table
 from turbo_seti.find_event.find_event_pipeline import find_event_pipeline
 
 class turboSETI(gr.sync_block):
@@ -38,6 +38,7 @@ class turboSETI(gr.sync_block):
     Need to have blimpy and turboSETI installed in order to import.
 
     STEPS: (make def for each?)
+    0. Want input to be filterbank file????
     1. Convert input data into .h5 file and store in some directory
     2. Define FindDoppler function on .h5 file
         (specifying max_drift, snr, & directory to place generated .dat files)
@@ -62,8 +63,8 @@ class turboSETI(gr.sync_block):
     """
 
     def __init__(self, filesource, filepath, h5_filename, dataset_name, dat_filename,
-        lst_filename, csvf_filename, max_drift, snr, out_dir, filter_threshold,
-        user_validation=False, saving=True): # args show up as parameters in GRC
+        lst_filename, csv_filename, max_drift, snr, out_dir, filter_threshold,
+        user_validation, saving): # args show up as parameters in GRC
 
         gr.sync_block.__init__(self,
             name="turboSETI", # shows up in GRC
@@ -77,7 +78,7 @@ class turboSETI(gr.sync_block):
         self.dataset_name = dataset_name # string
         self.dat_filename = dat_filename # string, 'data.dat'
         self.lst_filename = lst_filename # string, 'data.lst'
-        self.csvf_filename = csvf_filename # string, 'data.csv'
+        self.csv_filename = csv_filename # string, 'data.csv'
         self.max_drift = max_drift # integer?
         self.snr = snr # integer?
         self.out_dir = out_dir # = filepath?
@@ -96,7 +97,7 @@ class turboSETI(gr.sync_block):
         # pass --> not sure if I need this
         h5_filepath = self.filepath + self.h5_filename
 
-        if filesource = False:
+        if filesource == False:
             hf = h5py.File(h5_filepath, 'w') # argparse to specify filename?
             hf.create_dataset(self.dataset_name, data=in_sig)
             hf.close()
@@ -115,23 +116,23 @@ class turboSETI(gr.sync_block):
         doppler.search() # creates the .dat file
 
         dat_filepath = self.file_path + self.dat_filename
+        lst_filepath = self.file_path + self.lst_filename
+        csv_filepath = self.file_path + self.csv_filename
         # df = make_table(dat_filepath) # Not rlly necessary since we don't need to see the table in GR
         dat_list = [dat_filepath] # Not necessary for only 1 .dat file?
-        lst_filepath = self.file_path + self.lst_filename
+        number_in_cadence = len(dat_list)
 
         # Writes .dat files into .lst file
         with open(lst_filepath, 'w') as f:
             for item in dat_list:
                 f.write("%s\n" % item)
 
-        csvf_filepath = self.file_path + self.csvf_filename
-
         find_event = find_event_pipeline(lst_filepath,
                                         self.filter_threshold,
-                                        number_in_cadence = len(dat_list),
+                                        number_in_cadence,
                                         self.user_validation,
                                         self.saving,
-                                        csv_name = self.csvf_filename)
+                                        csv_name = self.csv_filename)
         print('Yay!')
 
         # output_items = find_event # convert to some kind of dtype stream
@@ -142,4 +143,4 @@ class turboSETI(gr.sync_block):
 
         # <+signal processing here+>
         # out[:] = in0
-        # return len(output_items[0])
+        # return len(output_items[0]) #fingers crossed!
