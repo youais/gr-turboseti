@@ -22,7 +22,7 @@
 
 import numpy as np
 from gnuradio import gr
-#from ?.main import DopplerFinder
+from main import DopplerFinder
 
 class find_et(gr.basic_block):
 

@@ -33,6 +33,5 @@ except ImportError:
 
 # import any pure python here
 from .turboSETI import turboSETI
-from .finddoppler import finddoppler
 from .find_et import find_et
 #
