@@ -1,2 +1,4 @@
-qa_turboSETI 9 0.203195
+qa_turboSETI 11 0.165845
+qa_finddoppler 0 0
+qa_find_et 2 0.155434
 ---

@@ -40,10 +40,10 @@ class find_et(gr.basic_block):
 
     def __init__(self, filename, out_dir, source_name, src_raj, src_dej,
                  tstart, tsamp, f_start, f_stop,
-                 coarse_chan=0, n_coarse_chan=1, n_fine_chans, n_ints_in_file,
-                 min_drift=0.00001, max_drift=4.0, drift_rate_resolution, snr=25.0,
-                 flagging=False, obs_info=None, append_output=False, blank_dc=True,
-                 kernels=None, gpu_backend=False, precision=1, gpu_id=0):
+                 coarse_chan, n_coarse_chan, n_fine_chans, n_ints_in_file,
+                 min_drift, max_drift, drift_rate_resolution, snr,
+                 flagging, obs_info, append_output, blank_dc,
+                 kernels, gpu_backend, precision, gpu_id):
 
         gr.basic_block.__init__(self,
             name="find_et",

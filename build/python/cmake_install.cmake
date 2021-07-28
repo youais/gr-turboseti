@@ -34,7 +34,7 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.py;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.py")
+   "/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.py;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.py;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
@@ -44,12 +44,13 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 file(INSTALL DESTINATION "/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti" TYPE FILE FILES
     "/Users/mychai/gr-turboseti/python/__init__.py"
     "/Users/mychai/gr-turboseti/python/turboSETI.py"
+    "/Users/mychai/gr-turboseti/python/find_et.py"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.pyc;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.pyc;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.pyo;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.pyo")
+   "/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.pyc;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.pyc;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et.pyc;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.pyo;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.pyo;/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et.pyo")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
@@ -59,8 +60,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 file(INSTALL DESTINATION "/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti" TYPE FILE FILES
     "/Users/mychai/gr-turboseti/build/python/__init__.pyc"
     "/Users/mychai/gr-turboseti/build/python/turboSETI.pyc"
+    "/Users/mychai/gr-turboseti/build/python/find_et.pyc"
     "/Users/mychai/gr-turboseti/build/python/__init__.pyo"
     "/Users/mychai/gr-turboseti/build/python/turboSETI.pyo"
+    "/Users/mychai/gr-turboseti/build/python/find_et.pyo"
     )
 endif()
 
