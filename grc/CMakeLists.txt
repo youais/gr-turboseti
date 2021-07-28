@@ -20,5 +20,5 @@
 
 install(FILES
     turboSETI.block.yml
-    turboseti_find_et.block.yml DESTINATION /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/grc/blocks
+    turboseti_find_et.block.yml DESTINATION share/gnuradio/grc/blocks
 )
