@@ -151,16 +151,16 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 
 //Library Install Name Destination Directory
-CMAKE_INSTALL_NAME_DIR:PATH=/usr/local/lib
+CMAKE_INSTALL_NAME_DIR:PATH=/Applications/GNURadio.app/Contents/MacOS/usr/lib
 
 //Path to a program.
 CMAKE_INSTALL_NAME_TOOL:FILEPATH=/usr/bin/install_name_tool
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=/usr/local
+CMAKE_INSTALL_PREFIX:PATH=/Applications/GNURadio.app/Contents/MacOS/usr
 
 //Library Install RPath
-CMAKE_INSTALL_RPATH:PATH=/usr/local/lib
+CMAKE_INSTALL_RPATH:PATH=/Applications/GNURadio.app/Contents/MacOS/usr/lib
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ld

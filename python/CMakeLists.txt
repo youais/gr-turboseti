@@ -32,7 +32,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    turboSETI.py DESTINATION ${GR_PYTHON_DIR}/turboseti
+    turboSETI.py
+    finddoppler.py
+    find_et.py DESTINATION ${GR_PYTHON_DIR}/turboseti
 )
 
 ########################################################################
@@ -43,3 +45,5 @@ include(GrTest)
 set(GR_TEST_TARGET_DEPS gnuradio-turboseti)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_turboSETI ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_turboSETI.py)
+GR_ADD_TEST(qa_finddoppler ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_finddoppler.py)
+GR_ADD_TEST(qa_find_et ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_et.py)

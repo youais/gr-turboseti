@@ -1,10 +1,10 @@
-Start testing: Jul 16 02:18 PDT
+Start testing: Jul 26 11:55 PDT
 ----------------------------------------------------------
 1/1 Testing: qa_turboSETI
 1/1 Test: qa_turboSETI
 Command: "/bin/sh" "/Users/mychai/gr-turboseti/build/python/qa_turboSETI_test.sh"
 Directory: /Users/mychai/gr-turboseti/build/python
-"qa_turboSETI" start time: Jul 16 02:18 PDT
+"qa_turboSETI" start time: Jul 26 11:55 PDT
 Output:
 ----------------------------------------------------------
 .
@@ -13,11 +13,11 @@ Ran 1 test in 0.001s
 
 OK
 <end of output>
-Test time =   2.05 sec
+Test time =   1.83 sec
 ----------------------------------------------------------
 Test Passed.
-"qa_turboSETI" end time: Jul 16 02:18 PDT
-"qa_turboSETI" time elapsed: 00:00:02
+"qa_turboSETI" end time: Jul 26 11:55 PDT
+"qa_turboSETI" time elapsed: 00:00:01
 ----------------------------------------------------------
 
-End testing: Jul 16 02:18 PDT
+End testing: Jul 26 11:55 PDT

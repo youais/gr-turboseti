@@ -1,0 +1,129 @@
+id: turboseti_find_et
+label: find_et
+category: '[turboseti]'
+
+templates:
+  imports: import turboseti
+  make: turboseti.find_et(${None})
+
+#  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
+#     Sub-entries of dictionary:
+#     * id (makes the value accessible as \$keyname, e.g. in the make entry)
+#     * label
+#     * dtype
+parameters:
+- id: filename
+  label: File name
+  dtype: string
+- id: out_dir
+  label: Output directory
+  dtype: string
+  default: './'
+- id: source_name
+  label: Source name
+  dtype: string
+- id: src_raj
+  label: RA (decimal hrs)
+  dtype: float
+- id: src_dej
+  label: Dec (decimal deg)
+  dtype: float
+- id: tstart
+  label: Observation start time
+  dtype: float
+- id: tsamp
+  label: Time step in secs
+  dtype: float
+- id: f_start
+  label: Initial freq
+  dtype: float
+- id: f_stop
+  label: Final freq
+  dtype: float
+- id: coarse_chan
+  label: Coarse channel no.
+  dtype: int
+  default: '0'
+- id: n_coarse_chan
+  label: No. of coarse channels
+  dtype: int
+  default: '1'
+- id: n_fine_chans
+  label: No. of fine channels
+  dtype: int
+- id: n_ints_in_file
+  label: No. of integrations in file
+  dtype: int
+- id: min_drift
+  label: Min drift rate
+  dtype: float
+  default: '0.00001'
+- id: max_drift
+  label: Max drift rate
+  dtype: float
+  default: '4.0'
+- id: drift_rate_resolution
+  label: Drift rate resolution
+  dtype: float
+- id: snr
+  label: SNR
+  dtype: float
+  default: '25.0'
+- id: flagging
+  label: Flagging
+  dtype: bool
+  default: False
+- id: obs_info
+  label: Observation info
+  dtype: None
+- id: append_output
+  label: Append output
+  dtype: bool
+  default: False
+- id: blank_dc
+  label: Flag blank DC
+  dtype: bool
+  default: True
+- id: kernels
+  label: Kernels
+  dtype: None
+  category: Kernels
+- id: gpu_backend
+  label: GPU backend
+  dtype: bool
+  category: Kernels
+  default: False
+- id: precision
+  label: Precision
+  dtype: int
+  category: Kernels
+  default: '1'
+- id: gpu_id
+  label: GPU ID
+  dtype: int
+  category: Kernels
+  default: '0'
+
+
+#  Make one 'inputs' list entry per input. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * domain
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs)
+inputs:
+- label: in
+  #domain: ...
+  dtype: float
+  #vlen: ...
+  optional: 1
+
+#  Make one 'outputs' list entry per output. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs)
+- label: out
+  optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+
+file_format: 1

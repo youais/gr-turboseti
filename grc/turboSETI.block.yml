@@ -1,4 +1,4 @@
-id: turboSETI
+id: turboseti_turboSETI
 label: turboSETI
 category: '[turboSETI]'
 
@@ -14,7 +14,7 @@ category: '[turboSETI]'
 
 parameters:
 - id: filesource
-  label: If input comes from file source
+  label: File source input
   dtype: bool
   default: false
 - id: filepath
@@ -49,11 +49,11 @@ parameters:
   dtype: int
   default: '3'
 - id: user_validation
-  label: ?
+  label: User validation
   dtype: bool
   default: false
 - id: saving
-  label: ?
+  label: Saving
   dtype: bool
   default: true
 
@@ -64,9 +64,10 @@ parameters:
 #      * vlen
 #      * optional (set to 1 for optional inputs)
 inputs:
-- label: eh
-  domain: stream
-  dtype: ${ type.t }
+- label: in
+  #domain: stream
+  #dtype: ${ type.t }
+  optional: 1
 
 #  Make one 'outputs' list entry per output. Sub-entries of dictionary:
 #      * label (an identifier for the GUI)
@@ -74,12 +75,13 @@ inputs:
 #      * vlen
 #      * optional (set to 1 for optional inputs)
 outputs:
-- optional: true #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+- label: out
+  optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
 
 templates:
-    imports: import turboSETI
+    imports: import turboseti
     make: |-
-      turboSETI(${filesource}, ${filepath}, ${h5_filename}, ${dataset_name},
+      turboseti.turboSETI(${filesource}, ${filepath}, ${h5_filename}, ${dataset_name},
       ${dat_filename}, ${lst_filename}, ${csv_filename}, ${max_drift},
       ${snr}, ${out_dir}, ${filter_threshold}, ${user_validation}, ${saving})
 

@@ -1,2 +1,2 @@
-qa_turboSETI 6 0.34099
+qa_turboSETI 9 0.203195
 ---

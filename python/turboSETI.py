@@ -29,21 +29,31 @@ from turbo_seti.find_doppler.find_doppler import FindDoppler
 # from turbo_seti.find_event.find_event import make_table
 from turbo_seti.find_event.find_event_pipeline import find_event_pipeline
 
-class turboSETI(gr.sync_block):
+class turboSETI(gr.basic_block):
 
     """
 
-    docstring for block turboSETI
+    Performs turboSETI analysis in GNU Radio flowgraph.
 
     Need to have blimpy and turboSETI installed in order to import.
 
-    STEPS: (make def for each?)
-    0. Want input to be filterbank file????
-    1. Convert input data into .h5 file and store in some directory
+    STEPS 2.0:
+    1. Make block that accumulates data in RAM buffer for 60 secs
+    2. Pass 60 sec chunk of data into turboSETI block
+    3. Run adapted FindDoppler function on chunk of data
+        -
+    4. Run find_event_pipeline on .dat file of data chunk
+    5. So on so forth
+
+    STEPS 1.0: (make def for each?)
+    1. Convert input data into .h5 file and store in some directory (or .fil?)
     2. Define FindDoppler function on .h5 file
         (specifying max_drift, snr, & directory to place generated .dat files)
-    3. Run FindDoppler(blahblahblah).search() --> this generates .dat file + stores in output_directory
-    4. OPTIONAL - Create table using make_table(directory_path + 'dat_file_name.dat'), store table in output_directory
+    3. Run FindDoppler(blahblahblah).search() --> this generates .dat file +
+        stores in output_directory
+    4. OPTIONAL - Create table using
+        make_table(directory_path + 'dat_file_name.dat'),
+        store table in output_directory
     5. Run find_event_pipeline to find potential events
     6. Output results of find_event_pipeline
         - Make compatible connection to QT GUI Sink to create realtime plots?
@@ -68,7 +78,7 @@ class turboSETI(gr.sync_block):
 
         gr.sync_block.__init__(self,
             name="turboSETI", # shows up in GRC
-            in_sig=[np.complex64], # figure out input dtype!
+            in_sig=[np.float32], # figure out input dtype!
             out_sig=None) # figure out output dtype!
 
         # self.something = something_here --> do I need this?
@@ -89,7 +99,7 @@ class turboSETI(gr.sync_block):
     # From Embedded Python Block ex: If an attribute with the
     # same name as a parameter is found, a callback is registered
     # (properties work too) --> what the heck does this mean???
-
+    '''
     def create_h5_file(self):
         # define input
         # convert input to .h5 file
@@ -105,11 +115,13 @@ class turboSETI(gr.sync_block):
 
         else:
             print('Data from file source.')
-
+    '''
 
     def run_find_doppler(self):
 
-        doppler = FindDoppler(self.h5_filename,
+        h5_filepath = self.filepath + self.h5_filename
+
+        doppler = FindDoppler(h5_filepath,
                                 self.max_drift,
                                 self.snr,
                                 self.out_dir)
@@ -133,7 +145,7 @@ class turboSETI(gr.sync_block):
                                         self.user_validation,
                                         self.saving,
                                         csv_name = self.csv_filename)
-        print('Yay!')
+        return print('Yay!')
 
         # output_items = find_event # convert to some kind of dtype stream
 

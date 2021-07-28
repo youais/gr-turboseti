@@ -19,5 +19,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    turboSETI.block.yml DESTINATION /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/grc/blocks
+    turboSETI.block.yml
+    turboseti_finddoppler.block.yml
+    turboseti_find_et.block.yml DESTINATION /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/grc/blocks
 )
