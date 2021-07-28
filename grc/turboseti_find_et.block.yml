@@ -1,5 +1,5 @@
 id: turboseti_find_et
-label: find_et
+label: FindDoppler
 category: '[turboseti]'
 
 templates:
@@ -73,9 +73,9 @@ parameters:
   label: Flagging
   dtype: bool
   default: False
-- id: obs_info
-  label: Observation info
-  dtype: None
+#- id: obs_info
+#  label: Observation info
+#  dtype: None
 - id: append_output
   label: Append output
   dtype: bool
@@ -84,10 +84,10 @@ parameters:
   label: Flag blank DC
   dtype: bool
   default: True
-- id: kernels
-  label: Kernels
-  dtype: None
-  category: Kernels
+#- id: kernels
+#  label: Kernels
+#  dtype: None
+#  category: Kernels
 - id: gpu_backend
   label: GPU backend
   dtype: bool
