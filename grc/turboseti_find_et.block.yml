@@ -108,7 +108,7 @@ parameters:
 inputs:
 - label: in
   #domain: ...
-  dtype: float
+  #dtype: 
   #vlen: ...
   optional: 1
 
