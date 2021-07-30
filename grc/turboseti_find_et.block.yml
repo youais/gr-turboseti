@@ -76,7 +76,7 @@ parameters:
   option_labels: [True, False]
 - id: obs_info
   label: Observation info
-  dtype: None
+  dtype: ${ type }
   default: None
   category: Misc
 - id: append_output
@@ -95,7 +95,7 @@ parameters:
   option_labels: [True, False]
 - id: kernels
   label: Kernels
-  dtype: None
+  dtype: ${ type }
   default: None
   category: Kernels
 - id: gpu_backend
