@@ -27,12 +27,15 @@ parameters:
 - id: source_name
   label: Source name
   dtype: string
+  category: Source
 - id: src_raj
   label: RA (decimal hrs)
   dtype: float
+  category: Source
 - id: src_dej
   label: Dec (decimal deg)
   dtype: float
+  category: Source
 - id: tstart
   label: Observation start time
   dtype: float
@@ -49,12 +52,15 @@ parameters:
   label: Coarse channel no.
   dtype: int
   default: '0'
+  category: Channels
 - id: n_coarse_chan
   label: No. of coarse channels
   dtype: int
+  category: Channels
   default: '1'
 - id: n_fine_chans
   label: No. of fine channels
+  category: Channels
   dtype: int
 - id: n_ints_in_file
   label: No. of integrations in file
@@ -75,16 +81,22 @@ parameters:
   label: Flagging
   dtype: bool
   default: false
+  options: [true, false]
+  option_labels: [True, False]
 - id: append_output
   label: Append output
   dtype: bool
   default: false
+  options: [true, false]
+  option_labels: [True, False]  
+  category: Misc
 - id: blank_dc
   label: Flag blank DC
   dtype: bool
   default: true
   options: [true, false]
   option_labels: [True, False]
+  category: Misc
 #- id: kernels
 #  label: Kernels
 #  dtype: None
@@ -94,6 +106,8 @@ parameters:
   dtype: bool
   category: Kernels
   default: false
+  options: [true, false]
+  option_labels: [True, False]
 - id: precision
   label: Precision
   dtype: int
