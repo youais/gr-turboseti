@@ -75,15 +75,15 @@ class find_et(gr.basic_block):
 
     def run_doppler_finder(self):
 
-        print("Initialising Clancy...")
+        #print("Initialising Clancy...")
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop,self.n_fine_chans, self.n_ints_in_file,
                             self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr, self.out_dir,
                             self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
-        print("Clancy searching for ET...")
-        clancy.find_ET()
-        print("Clancy searched! Clancy excellent! Check results?")
+        #print("Clancy searching for ET...")
+        return clancy.find_ET()
+        #print("Clancy searched! Clancy excellent! Check results?")
 
 #    def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
