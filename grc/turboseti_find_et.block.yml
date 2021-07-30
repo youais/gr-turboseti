@@ -1,6 +1,6 @@
 id: turboseti_find_et
-label: DopplerFinder
-category: '[turboseti]'
+label: Doppler Finder
+category: '[turboSETI]'
 
 templates:
   imports: import turboseti
@@ -108,7 +108,7 @@ parameters:
 inputs:
 - label: in
   #domain: ...
-  #dtype: 
+  #dtype:
   #vlen: ...
   optional: 1
 
