@@ -4,7 +4,12 @@ category: '[turboSETI]'
 
 templates:
   imports: import turboseti
-  make: turboseti.find_et(${None})
+  make: turboseti.find_et(${filename}, ${source_name}, ${src_raj}, ${src_dej},
+                        ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
+                        ${n_ints_in_file}, ${coarse_chan}, ${n_coarse_chan},
+                        ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
+                        ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
+                        ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
 
 #  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
 #     Sub-entries of dictionary:
@@ -69,15 +74,17 @@ parameters:
 - id: flagging
   label: Flagging
   dtype: bool
-  default: False
+  default: false
 - id: append_output
   label: Append output
   dtype: bool
-  default: False
+  default: false
 - id: blank_dc
   label: Flag blank DC
   dtype: bool
-  default: True
+  default: true
+  options: [true, false]
+  option_labels: [True, False]
 #- id: kernels
 #  label: Kernels
 #  dtype: None
@@ -86,7 +93,7 @@ parameters:
   label: GPU backend
   dtype: bool
   category: Kernels
-  default: False
+  default: false
 - id: precision
   label: Precision
   dtype: int

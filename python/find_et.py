@@ -40,7 +40,7 @@ class find_et(gr.basic_block):
 
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                         coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
-                        flagging, obs_info, append_output, lank_dc,
+                        flagging, obs_info, append_output, blank_dc,
                         kernels, gpu_backend, precision, gpu_id):
 
         gr.basic_block.__init__(self,
