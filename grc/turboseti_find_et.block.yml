@@ -8,8 +8,8 @@ templates:
                         ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
                         ${n_ints_in_file}, ${coarse_chan}, ${n_coarse_chan},
                         ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
-                        ${flagging}, ${append_output}, ${blank_dc}, #${obs_info}, ${kernels},
-                        ${gpu_backend}, ${precision}, ${gpu_id})
+                        ${flagging}, ${append_output}, ${blank_dc},
+                        ${gpu_backend}, ${precision}, ${gpu_id}) #${obs_info}, ${kernels},
 
 #  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
 #     Sub-entries of dictionary:
