@@ -2,15 +2,6 @@ id: turboseti_find_et
 label: Doppler Finder
 category: '[turboSETI]'
 
-templates:
-  imports: import turboseti
-  make: turboseti.find_et(${filename}, ${source_name}, ${src_raj}, ${src_dej},
-                        ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
-                        ${n_ints_in_file}, ${coarse_chan}, ${n_coarse_chan},
-                        ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
-                        ${flagging}, ${append_output}, ${blank_dc}, ${gpu_backend}, ${precision}, ${gpu_id})
-                        # ${obs_info}, ${kernels},
-
 #  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
 #     Sub-entries of dictionary:
 #     * id (makes the value accessible as \$keyname, e.g. in the make entry)
@@ -40,13 +31,13 @@ parameters:
   label: Observation start time
   dtype: float
 - id: tsamp
-  label: Time step in secs
+  label: Time step (s)
   dtype: float
 - id: f_start
-  label: Initial freq
+  label: Initial freq (MHz)
   dtype: float
 - id: f_stop
-  label: Final freq
+  label: Final freq (MHz)
   dtype: float
 - id: coarse_chan
   label: Coarse channel no.
@@ -56,12 +47,12 @@ parameters:
 - id: n_coarse_chan
   label: No. of coarse channels
   dtype: int
-  category: Channels
   default: '1'
+  category: Channels
 - id: n_fine_chans
   label: No. of fine channels
-  category: Channels
   dtype: int
+  category: Channels
 - id: n_ints_in_file
   label: No. of integrations in file
   dtype: int
@@ -83,41 +74,47 @@ parameters:
   default: false
   options: [true, false]
   option_labels: [True, False]
+- id: obs_info
+  label: Observation info
+  dtype: None
+  default: None
+  category: Misc
 - id: append_output
   label: Append output
   dtype: bool
   default: false
+  category: Misc
   options: [true, false]
   option_labels: [True, False]
-  category: Misc
 - id: blank_dc
   label: Flag blank DC
   dtype: bool
   default: true
+  category: Misc
   options: [true, false]
   option_labels: [True, False]
-  category: Misc
-#- id: kernels
-#  label: Kernels
-#  dtype: None
-#  category: Kernels
+- id: kernels
+  label: Kernels
+  dtype: None
+  default: None
+  category: Kernels
 - id: gpu_backend
   label: GPU backend
   dtype: bool
-  category: Kernels
   default: false
+  category: Kernels
   options: [true, false]
   option_labels: [True, False]
 - id: precision
   label: Precision
   dtype: int
-  category: Kernels
   default: '1'
+  category: Kernels
 - id: gpu_id
   label: GPU ID
   dtype: int
-  category: Kernels
   default: '0'
+  category: Kernels
 
 
 #  Make one 'inputs' list entry per input. Sub-entries of dictionary:
@@ -128,8 +125,8 @@ parameters:
 #      * optional (set to 1 for optional inputs)
 inputs:
 - label: in
-  #domain: ...
-  #dtype:
+  #domain: stream
+  #dtype: ${ type }
   #vlen: ...
   optional: 1
 
@@ -139,6 +136,17 @@ inputs:
 #      * vlen
 #      * optional (set to 1 for optional inputs)
 - label: out
+  domain: message
   optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+
+templates:
+  imports: import turboseti
+  make: turboseti.find_et(${filename}, ${source_name}, ${src_raj}, ${src_dej},
+                        ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
+                        ${n_ints_in_file}, ${coarse_chan}, ${n_coarse_chan},
+                        ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
+                        ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
+                        ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
+                        # ${obs_info}, ${kernels},
 
 file_format: 1
