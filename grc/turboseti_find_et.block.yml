@@ -1,5 +1,5 @@
 id: turboseti_find_et
-label: FindDoppler
+label: DopplerFinder
 category: '[turboseti]'
 
 templates:
@@ -62,9 +62,6 @@ parameters:
   label: Max drift rate
   dtype: float
   default: '4.0'
-- id: drift_rate_resolution
-  label: Drift rate resolution
-  dtype: float
 - id: snr
   label: SNR
   dtype: float
@@ -73,9 +70,6 @@ parameters:
   label: Flagging
   dtype: bool
   default: False
-#- id: obs_info
-#  label: Observation info
-#  dtype: None
 - id: append_output
   label: Append output
   dtype: bool

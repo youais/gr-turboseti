@@ -22,7 +22,7 @@
 
 import numpy as np
 from gnuradio import gr
-from main import DopplerFinder
+from turboseti_stream.main import DopplerFinder
 
 class find_et(gr.basic_block):
 
@@ -38,12 +38,10 @@ class find_et(gr.basic_block):
 
     """
 
-    def __init__(self, filename, out_dir, source_name, src_raj, src_dej,
-                 tstart, tsamp, f_start, f_stop,
-                 coarse_chan, n_coarse_chan, n_fine_chans, n_ints_in_file,
-                 min_drift, max_drift, drift_rate_resolution, snr,
-                 flagging, obs_info, append_output, blank_dc,
-                 kernels, gpu_backend, precision, gpu_id):
+    def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
+                        coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
+                        flagging, obs_info, append_output, lank_dc,
+                        kernels, gpu_backend, precision, gpu_id):
 
         gr.basic_block.__init__(self,
             name="find_et",
@@ -51,7 +49,6 @@ class find_et(gr.basic_block):
             out_sig=None)
 
         self.filename = filename
-        self.out_dir = out_dir
         self.source_name = source_name
         self.src_raj = src_raj
         self.src_dej = src_dej
@@ -59,14 +56,14 @@ class find_et(gr.basic_block):
         self.tsamp = tsamp
         self.f_start = f_start
         self.f_stop = f_stop
-        self.coarse_chan = coarse_chan
-        self.n_coarse_chan = n_coarse_chan
         self.n_fine_chans = n_fine_chans
         self.n_ints_in_file = n_ints_in_file
+        self.coarse_chan = coarse_chan
+        self.n_coarse_chan = n_coarse_chan
         self.min_drift = min_drift
         self.max_drift = max_drift
-        self.drift_rate_resolution = drift_rate_resolution
         self.snr = snr
+        self.out_dir = out_dir
         self.flagging = flagging
         self.obs_info = obs_info
         self.append_output = append_output
@@ -78,16 +75,15 @@ class find_et(gr.basic_block):
 
     def run_doppler_finder(self):
 
-        clancy = DopplerFinder(self, self.filename, self.out_dir, self.source_name,
-                            self.src_raj, self.src_dej, self.tstart, self.tsamp,
-                            self.f_start, self.f_stop, self.coarse_chan,
-                            self.n_coarse_chan, self.n_fine_chans, self.n_ints_in_file,
-                            self.min_drift, self.max_drift, self.drift_rate_resolution,
-                            self.snr, self.flagging, self.obs_info, self.append_output,
-                            self.blank_dc, self.kernels, self.gpu_backend, self.precision,
-                            self.gpu_id)
-
+        print("Initialising Clancy...")
+        clancy = DopplerFinder(self, self.filename, self.source_name, self.src_raj, self.src_dej,
+                            self.tstart, self.tsamp, self.f_start, self.f_stop,self.n_fine_chans, self.n_ints_in_file,
+                            self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr, self.out_dir,
+                            self.flagging, self.obs_info, self.append_output, self.blank_dc,
+                            self.kernels, self.gpu_backend, self.precision, self.gpu_id)
+        print("Clancy searching for ET...")
         clancy.find_ET()
+        print("Clancy searched! Clancy excellent! Check results?")
 
 #    def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
