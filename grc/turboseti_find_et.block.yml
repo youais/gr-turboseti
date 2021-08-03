@@ -44,6 +44,11 @@ parameters:
   dtype: int
   default: '0'
   category: Channels
+- id: log_level_int
+  label: Log level int
+  dtype: int
+  default: '1'
+  category: Misc
 - id: n_coarse_chan
   label: No. of coarse channels
   dtype: int

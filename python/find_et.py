@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 #
 
-
+import logging #make sure this is here
 import numpy as np
 from gnuradio import gr
 from turboseti_stream.turboseti_stream import DopplerFinder
@@ -39,7 +39,7 @@ class find_et(gr.basic_block):
     """
 
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                        coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
+                        log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
                         flagging, obs_info, append_output, blank_dc,
                         kernels, gpu_backend, precision, gpu_id):
 
@@ -58,6 +58,16 @@ class find_et(gr.basic_block):
         self.f_stop = f_stop
         self.n_fine_chans = n_fine_chans
         self.n_ints_in_file = n_ints_in_file
+
+        if log_level_int == 0:
+            self.log_level_int = logging.DEBUG
+        elif log_level_int == 1:
+            self.log_level_int = logging.INFO
+        elif log_level_int == 2:
+            self.log_level_int = logging.WARN
+        else:
+            raise RuntimeError("Incorrect logging level (%i)"%log_level_int) 
+
         self.coarse_chan = coarse_chan
         self.n_coarse_chan = n_coarse_chan
         self.min_drift = min_drift
@@ -77,18 +87,20 @@ class find_et(gr.basic_block):
 
         #print("Initialising Clancy...")
         #output_items[0][:] = input_items[0] + input_items[1]
+        spectra = input_items[0]
 
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
-                            self.tstart, self.tsamp, self.f_start, self.f_stop,self.n_fine_chans, self.n_ints_in_file,
-                            self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr, self.out_dir,
+                            self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
+                            self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr, self.out_dir,
                             self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
+
         #print("Clancy searching for ET...")
-        clancy.find_ET(input_items)
+        clancy.find_ET(spectra)
 
         #self.consume(0, len(in0))
 
-        return len(input_items)
+        return len(spectra)
         #print("Clancy searched! Clancy excellent! Check results?")
 
 #    def forecast(self, noutput_items, ninput_items_required):
