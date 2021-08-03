@@ -22,7 +22,7 @@
 
 import numpy as np
 from gnuradio import gr
-from turboseti_stream.main import DopplerFinder
+from turboseti_stream.turboseti_stream import DopplerFinder
 
 class find_et(gr.basic_block):
 
@@ -73,16 +73,22 @@ class find_et(gr.basic_block):
         self.precision = precision
         self.gpu_id = gpu_id
 
-    def run_doppler_finder(self):
+    def general_work(self, input_items, output_items):
 
         #print("Initialising Clancy...")
+        #output_items[0][:] = input_items[0] + input_items[1]
+
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop,self.n_fine_chans, self.n_ints_in_file,
                             self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr, self.out_dir,
                             self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
         #print("Clancy searching for ET...")
-        return clancy.find_ET()
+        clancy.find_ET(input_items)
+
+        #self.consume(0, len(in0))
+
+        return len(input_items)
         #print("Clancy searched! Clancy excellent! Check results?")
 
 #    def forecast(self, noutput_items, ninput_items_required):

@@ -1,0 +1,3 @@
+qa_turboSETI 9 0.163433
+qa_find_et 6 0.62954
+---
