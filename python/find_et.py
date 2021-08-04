@@ -66,7 +66,7 @@ class find_et(gr.basic_block):
         elif log_level_int == 2:
             self.log_level_int = logging.WARN
         else:
-            raise RuntimeError("Incorrect logging level (%i)"%log_level_int) 
+            raise RuntimeError("Incorrect logging level (%i)"%log_level_int)
 
         self.coarse_chan = coarse_chan
         self.n_coarse_chan = n_coarse_chan
@@ -91,8 +91,8 @@ class find_et(gr.basic_block):
 
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
-                            self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr, self.out_dir,
-                            self.flagging, self.obs_info, self.append_output, self.blank_dc,
+                            self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
+                            self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
 
         #print("Clancy searching for ET...")

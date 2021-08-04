@@ -44,11 +44,6 @@ parameters:
   dtype: int
   default: '0'
   category: Channels
-- id: log_level_int
-  label: Log level int
-  dtype: int
-  default: '1'
-  category: Misc
 - id: n_coarse_chan
   label: No. of coarse channels
   dtype: int
@@ -58,6 +53,11 @@ parameters:
   label: No. of fine channels
   dtype: int
   category: Channels
+- id: log_level_int
+  label: Log level int
+  dtype: int
+  default: '1'
+  category: Misc
 - id: n_ints_in_file
   label: No. of integrations in file
   dtype: int
@@ -152,6 +152,5 @@ templates:
                         ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
                         ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
                         ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
-                        # ${obs_info}, ${kernels},
 
 file_format: 1
