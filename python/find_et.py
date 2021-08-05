@@ -41,7 +41,7 @@ class find_et(gr.basic_block):
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                         log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
                         flagging, obs_info, append_output, blank_dc,
-                        kernels, gpu_backend, precision, gpu_id):
+                        kernels, gpu_backend, precision, gpu_id, input_buffer_len):
 
         gr.basic_block.__init__(self,
                                 name="Doppler Finder",
@@ -83,16 +83,16 @@ class find_et(gr.basic_block):
         self.precision = precision
         self.gpu_id = gpu_id
 
-        def forecast(self, noutput_items, ninput_items_required):
+        self.input_buffer_len = input_buffer_len
+
+    def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
-            for i in range(len(ninput_items_required)):
-                ninput_items_required[i] = noutput_items
+        ninput_items_required[0] = self.input_buffer_len
 
     def general_work(self, input_items, output_items):
 
         #print("Initialising Clancy...")
-        #output_items[0][:] = input_items[0] + input_items[1]
-        spectra = input_items[0][:len(output_items[0])]
+        spectra = input_items[0] #[:len(output_items[0])]
 
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
@@ -103,7 +103,7 @@ class find_et(gr.basic_block):
         #print("Clancy searching for ET...")
         clancy.find_ET(spectra)
 
-        self.consume(0, len(spectra))
+        self.consume(len(self.input_buffer_len))
 
         return len(spectra)
         #print("Clancy searched! Clancy excellent! Check results?")

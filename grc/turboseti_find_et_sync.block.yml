@@ -140,9 +140,9 @@ inputs:
 #      * dtype
 #      * vlen
 #      * optional (set to 1 for optional inputs)
-- label: out
-  domain: message
-  optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+#- label: out
+#  domain: message
+#  optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
 
 templates:
   imports: import turboseti
@@ -150,7 +150,7 @@ templates:
                         ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
                         ${n_ints_in_file}, ${log_level_int}, ${coarse_chan}, ${n_coarse_chan},
                         ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
-                        ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
+                        ${flagging}, ${obs_info}, ${append_output}, ${blank_dc})
                         ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
 
 file_format: 1
