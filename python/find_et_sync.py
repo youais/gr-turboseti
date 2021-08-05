@@ -19,34 +19,23 @@
 # Boston, MA 02110-1301, USA.
 #
 
-import logging #make sure this is here
-import numpy as np
+
+import numpy
 from gnuradio import gr
-from turboseti_stream.turboseti_stream import DopplerFinder
 
-class find_et(gr.basic_block):
-
+class find_et_sync(gr.sync_block):
     """
-
-    GNU Radio block that runs yolo'd version of turboSETI that can directly
-    analyse data stored in RAM, rather than a .fil/.h5 file. Outputs .dat and .log
-    file into user-specified out_dir.
-
-    Part of the ATA GNU Radio pipeline. See examples folder for use in flowgraph.
-
-    Yolo'd source code @ https://github.com/youais/turboseti-stream/blob/patch-1/main.py
-
+    docstring for block find_et_sync
     """
-
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                        log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
-                        flagging, obs_info, append_output, blank_dc,
-                        kernels, gpu_backend, precision, gpu_id):
+                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
+                    flagging, obs_info, append_output, blank_dc,
+                    kernels, gpu_backend, precision, gpu_id):
 
-        gr.basic_block.__init__(self,
-                                name="Doppler Finder",
-                                in_sig=[np.float32],
-                                out_sig=None)
+        gr.sync_block.__init__(self,
+            name="DopplerFinder Sink",
+            in_sig=[numpy.float32],
+            out_sig=None)
 
         self.filename = filename
         self.source_name = source_name
@@ -83,30 +72,27 @@ class find_et(gr.basic_block):
         self.precision = precision
         self.gpu_id = gpu_id
 
-        def forecast(self, noutput_items, ninput_items_required):
-        #setup size of input_items[i] for work call
-            for i in range(len(ninput_items_required)):
-                ninput_items_required[i] = noutput_items
+    def work(self, input_items, output_items):
 
-    def general_work(self, input_items, output_items):
+        spectra = input_items[0]
 
-        #print("Initialising Clancy...")
-        #output_items[0][:] = input_items[0] + input_items[1]
-        spectra = input_items[0][:len(output_items[0])]
-
+        print("Initialising Clancy...")
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
                             self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
                             self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
 
-        #print("Clancy searching for ET...")
+        print("Clancy searching for ET...")
         clancy.find_ET(spectra)
-
-        self.consume(0, len(spectra))
+        print("Done.")
 
         return len(spectra)
-        #print("Clancy searched! Clancy excellent! Check results?")
+
+#    def forecast(self, noutput_items, ninput_items_required):
+        #setup size of input_items[i] for work call
+#        for i in range(len(ninput_items_required)):
+#            ninput_items_required[i] = noutput_items
 
 #    def general_work(self, input_items, output_items):
 #        output_items[0][:] = input_items[0]

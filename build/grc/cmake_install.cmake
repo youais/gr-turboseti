@@ -36,6 +36,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gnuradio/grc/blocks" TYPE FILE FILES
     "/Users/mychai/gr-turboseti/grc/turboSETI.block.yml"
     "/Users/mychai/gr-turboseti/grc/turboseti_find_et.block.yml"
+    "/Users/mychai/gr-turboseti/grc/turboseti_find_et_sync.block.yml"
     )
 endif()
 

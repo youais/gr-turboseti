@@ -70,11 +70,15 @@
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.py
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.py
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et.py
+/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et_sync.py
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.pyc
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.pyc
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et.pyc
+/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et_sync.pyc
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/__init__.pyo
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/turboSETI.pyo
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et.pyo
+/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/python/site-packages/turboseti/find_et_sync.pyo
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/grc/blocks/turboSETI.block.yml
 /Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/grc/blocks/turboseti_find_et.block.yml
+/Applications/GNURadio.app/Contents/MacOS/usr/share/gnuradio/grc/blocks/turboseti_find_et_sync.block.yml

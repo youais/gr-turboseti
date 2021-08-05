@@ -1,5 +1,5 @@
-id: turboseti_find_et
-label: DopplerFinder
+id: turboseti_find_et_sync
+label: DopplerFinder Sink
 category: '[turboSETI]'
 
 #  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
