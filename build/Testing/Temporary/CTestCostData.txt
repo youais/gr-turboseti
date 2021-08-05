@@ -1,3 +1,0 @@
-qa_find_et 4 1.0357
-qa_find_et_sync 4 0.858191
----
