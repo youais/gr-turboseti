@@ -1,4 +1,0 @@
-qa_turboSETI 14 0.106699
-qa_find_et 10 0.373785
-qa_find_et_sync 2 0.17385
----

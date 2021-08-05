@@ -19,7 +19,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    turboSETI.block.yml
     turboseti_find_et.block.yml
     turboseti_find_et_sync.block.yml DESTINATION share/gnuradio/grc/blocks
 )

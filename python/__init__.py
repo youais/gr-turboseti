@@ -32,7 +32,6 @@ except ImportError:
     pass
 
 # import any pure python here
-from .turboSETI import turboSETI
 from .find_et import find_et
 from .find_et_sync import find_et_sync
 #
