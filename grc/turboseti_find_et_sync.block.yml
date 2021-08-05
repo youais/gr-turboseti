@@ -146,7 +146,7 @@ inputs:
 
 templates:
   imports: import turboseti
-  make: turboseti.find_et(${filename}, ${source_name}, ${src_raj}, ${src_dej},
+  make: turboseti.find_et_sync(${filename}, ${source_name}, ${src_raj}, ${src_dej},
                         ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
                         ${n_ints_in_file}, ${log_level_int}, ${coarse_chan}, ${n_coarse_chan},
                         ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
