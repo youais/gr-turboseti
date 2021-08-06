@@ -73,7 +73,7 @@ class find_et_sync(gr.sync_block):
 
         gr.sync_block.__init__(self,
             name="DopplerFinder Sink",
-            in_sig=[np.float32, self.n_fine_chans], #this should be vector float32, specify size = 1e6?
+            in_sig=[(np.float32, self.n_fine_chans)], #this should be vector float32, specify size = 1e6?
             out_sig=None)
 
     def work(self, input_items, output_items):
