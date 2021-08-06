@@ -30,13 +30,8 @@ class find_et_sync(gr.sync_block):
     """
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
-                    flagging, obs_info, append_output, blank_dc):
-                    #kernels, gpu_backend, precision, gpu_id):
-
-        gr.sync_block.__init__(self,
-            name="DopplerFinder Sink",
-            in_sig=[np.float32],
-            out_sig=None)
+                    flagging, obs_info, append_output, blank_dc,
+                    kernels, gpu_backend, precision, gpu_id):
 
         self.filename = filename
         self.source_name = source_name
@@ -68,30 +63,40 @@ class find_et_sync(gr.sync_block):
         self.obs_info = obs_info
         self.append_output = append_output
         self.blank_dc = blank_dc
-        #self.kernels = kernels
-        #self.gpu_backend = gpu_backend
-        #self.precision = precision
-        #self.gpu_id = gpu_id
+        self.kernels = kernels
+        self.gpu_backend = gpu_backend
+        self.precision = precision
+        self.gpu_id = gpu_id
+
+        # Create empty matrix with correct shape
+        spectra = np.zeros((self.n_ints_in_file, self.n_fine_chans), dtype=float32) #, order='C' for column major, order='F' for row major
+
+        gr.sync_block.__init__(self,
+            name="DopplerFinder Sink",
+            in_sig=[np.float32, self.n_fine_chans], #this should be vector float32, specify size = 1e6?
+            out_sig=None)
 
     def work(self, input_items, output_items):
 
-#        input_spectra = input_items[0]
+        spectra = input_items
 #        print(input_spectra.shape, ": input spectra shape.")
 #        spectra = input_spectra.reshape((self.n_ints_in_file, self.n_fine_chans))
 #        print(spectra.shape, ": adjusted spectra shape."
+
+        #set_output_multiple
 
         print("Initialising Clancy...")
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
                             self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
                             self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc)
-                            #self.kernels, self.gpu_backend, self.precision, self.gpu_id)
+                            self.kernels, self.gpu_backend, self.precision, self.gpu_id)
 
         print("Clancy searching for ET...")
         clancy.find_ET(spectra)
         print("Done.")
 
-        return len(spectra)
+        return len(spectra[0])
 
 #    def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
