@@ -78,7 +78,8 @@ class find_et_sync(gr.sync_block):
 
     def work(self, input_items, output_items):
 
-        spectra = input_items
+        # Populate empty matrix?
+        spectra = spectra + input_items
 #        print(input_spectra.shape, ": input spectra shape.")
 #        spectra = input_spectra.reshape((self.n_ints_in_file, self.n_fine_chans))
 #        print(spectra.shape, ": adjusted spectra shape."
@@ -89,7 +90,7 @@ class find_et_sync(gr.sync_block):
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
                             self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
-                            self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc)
+                            self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
 
         print("Clancy searching for ET...")
