@@ -69,7 +69,7 @@ class find_et_sync(gr.sync_block):
         self.gpu_id = gpu_id
 
         # Create empty matrix with correct shape
-        spectra = np.zeros((self.n_ints_in_file, self.n_fine_chans), dtype=float32) #, order='C' for column major, order='F' for row major
+        spectra = np.zeros((self.n_ints_in_file, self.n_fine_chans), dtype=np.float32) #, order='C' for column major, order='F' for row major
 
         gr.sync_block.__init__(self,
             name="DopplerFinder Sink",
