@@ -31,7 +31,7 @@ class find_et_sync(gr.sync_block):
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
                     flagging, obs_info, append_output, blank_dc,
-                    kernels, gpu_backend, precision, gpu_id):
+                    kernels, gpu_backend, precision, gpu_id, spectra):
 
         self.filename = filename
         self.source_name = source_name
@@ -69,7 +69,7 @@ class find_et_sync(gr.sync_block):
         self.gpu_id = gpu_id
 
         # Create empty matrix with correct shape
-        spectra = np.zeros((self.n_ints_in_file, self.n_fine_chans), dtype=np.float32) #, order='C' for column major, order='F' for row major
+        self.spectra = np.zeros((self.n_ints_in_file, self.n_fine_chans), dtype=np.float32) #, order='C' for column major, order='F' for row major
 
         gr.sync_block.__init__(self,
             name="DopplerFinder Sink",
@@ -79,7 +79,7 @@ class find_et_sync(gr.sync_block):
     def work(self, input_items, output_items):
 
         # Populate empty matrix?
-        spectra = spectra + input_items
+        spectra = self.spectra + input_items
 #        print(input_spectra.shape, ": input spectra shape.")
 #        spectra = input_spectra.reshape((self.n_ints_in_file, self.n_fine_chans))
 #        print(spectra.shape, ": adjusted spectra shape."
