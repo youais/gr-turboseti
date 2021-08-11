@@ -34,4 +34,5 @@ except ImportError:
 # import any pure python here
 from .find_et import find_et
 from .find_et_sync import find_et_sync
+from .find_et_buffer import find_et_buffer
 #

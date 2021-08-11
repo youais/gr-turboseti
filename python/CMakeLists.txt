@@ -33,7 +33,8 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     find_et.py
-    find_et_sync.py DESTINATION ${GR_PYTHON_DIR}/turboseti
+    find_et_sync.py
+    find_et_buffer.py DESTINATION ${GR_PYTHON_DIR}/turboseti
 )
 
 ########################################################################
@@ -45,3 +46,4 @@ set(GR_TEST_TARGET_DEPS gnuradio-turboseti)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_find_et ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_et.py)
 GR_ADD_TEST(qa_find_et_sync ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_et_sync.py)
+GR_ADD_TEST(qa_find_et_buffer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_et_buffer.py)

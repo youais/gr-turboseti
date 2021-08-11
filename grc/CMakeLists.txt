@@ -20,5 +20,6 @@
 
 install(FILES
     turboseti_find_et.block.yml
-    turboseti_find_et_sync.block.yml DESTINATION share/gnuradio/grc/blocks
+    turboseti_find_et_sync.block.yml
+    turboseti_find_et_buffer.block.yml DESTINATION share/gnuradio/grc/blocks
 )
