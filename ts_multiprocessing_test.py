@@ -12,14 +12,17 @@ def apply_turboseti(spectra, filename, source_name, src_raj, src_dej,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr,
                     out_dir, flagging, obs_info, append_output, blank_dc,
                     kernels, gpu_backend, precision, gpu_id):
+    
     clancy = DopplerFinder(filename, source_name, src_raj, src_dej,
                         tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                         log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr,
                         out_dir, flagging, obs_info, append_output, blank_dc,
                         kernels, gpu_backend, precision, gpu_id)
     clancy.find_ET(spectra)
+    
     return print("apply_turboseti function done")
 
+  
 filename = 'fake_luyten_CH0'
 source_name = 'fake luyten'
 src_raj = 40.1
@@ -47,27 +50,24 @@ precision = 1
 gpu_id = 0
 
 spectra = np.empty((0, n_fine_chans), dtype=np.float32, order='C')
-
 input_items = np.random.rand(120, 1, 1000000)
 
 i = 0
 
-while True:
+while True:   
     if spectra.shape[0] < n_ints_in_file: # spectra rows < 60
         print("Buffer spectrum row #:", i, "/60")
-        #print("Adding next vector to spectra...", input_items[0][i])
-        #print("input_items[0][i] shape:", input_items[0][i].shape)
         print("input_items[0]", input_items[i])
         print("input_items[0] shape:", input_items[i].shape)
         print("spectra shape:", spectra.shape)
-        # self.spectra[self.buffer_spectrum, :] = input_items.copy()
-        #matrix[i] = input_items[0]
+        
         spectra = np.append(spectra, input_items[i], axis=0)
         print("Done.")
+        
         print("New spectra shape:", spectra.shape)
-        #self.buffer_spectrum +=1
         i += 1
         print("Upcoming row #:", i, "/60") #self.buffer_spectrum)
+    
     else:
         if __name__ == "__main__":
             print("Spectra:", spectra)
