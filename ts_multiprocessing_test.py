@@ -83,7 +83,8 @@ while True:
                 #print("Starting DopplerFinder process...")
                 #dopplerfinder_process.start()
                 #dopplerfinder_process.join()
-                print(dopplerfinder_process.get())
+                print(dopplerfinder_process.get()) # if this is uncommented, the following lines won't run
+                                                   # but the loop will restart from the if statement
                 print("Process done.")
                 spectra = np.empty((0, n_fine_chans), dtype=np.float32, order='C')
                 print("Spectra rows:", spectra.shape[0])
