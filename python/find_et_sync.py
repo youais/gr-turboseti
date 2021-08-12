@@ -23,7 +23,7 @@ import logging #make sure this is here
 import numpy as np
 import multiprocessing as mp
 from gnuradio import gr
-from tss import DopplerFinder
+from turboseti_stream.turboseti_stream import DopplerFinder
 
 class find_et_sync(gr.sync_block):
 
@@ -89,51 +89,85 @@ class find_et_sync(gr.sync_block):
             out_sig=None)
 
     def apply_turboseti(self):
-        # Clancy is Richard Elkins' cat
+        print("Initialising Clancy...")
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
                             self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
                             self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
+        print("Clancy is looking for ET...")
         clancy.find_ET(self.spectra)
+        print("Clancy is done.")
 
     def work(self, input_items, output_items):
         i = 0
-        while True:
-        #matrix = []
-            if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
-                print("Buffer spectrum row #:", i, "/60")
-                #print("Adding next vector to spectra...", input_items[0][i])
-                #print("input_items[0][i] shape:", input_items[0][i].shape)
-                print("input_items[0]", input_items[0])
-                print("input_items[0] shape:", input_items[0].shape)
-                print("spectra shape:", self.spectra.shape)
-                # self.spectra[self.buffer_spectrum, :] = input_items.copy()
-                #matrix[i] = input_items[0]
-                self.spectra = np.append(self.spectra, input_items[0], axis=0)
-                print("Done.")
-                print("New spectra shape:", self.spectra.shape)
-                #self.buffer_spectrum +=1
-                i += 1
-                print("Next row #:", i, "/60") #self.buffer_spectrum)
-            else:
-                #print("60 * 1e6 matrix accumulated.")
-                #print("Sending to DopplerFinder...")
-                if __name__ == "__main__":
-                #parent_conn, child_conn = Pipe()
-                    print("spectra:", self.spectra)
-                    print("spectra size:", self.spectra.size)
-                    print("Creating DopplerFinder process...")
-                    dopplerfinder_process = mp.Process(target=apply_turboseti)
-                    print("Starting DopplerFinder process...")
-                    dopplerfinder_process.start()
-                    dopplerfinder_process.join()
-                    print("Clancy done searching for ET!")
-                    self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32)
-                    print("spectra rows:", self.spectra.size[0])
+        if __init__ == "__main__":
+            with mp.Pool(processes=1) as pool:
+                while True:
+                    if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
+                        print("Buffer spectrum row #:", i, "/60")
+                        print("input_items[0]", input_items[0])
+                        print("input_items[0] shape:", input_items[0].shape)
+                        print("spectra shape:", self.spectra.shape)
+                        spectra = np.append(self.spectra, input_items[0], axis=0)
+                        print("Done.")
+                        print("New spectra shape:", self.spectra.shape)
+                        i += 1
+                        print("Upcoming row #:", i, "/60")
+                    else:
+                        print("Spectra:", self.spectra)
+                        print("Spectra shape:", self.spectra.shape)
+                        print("Creating DopplerFinder process...")
+                        dopplerfinder_process = pool.apply_async(func=apply_turboseti, args=(self,))
+                        print("Starting DopplerFinder process...")
+                        print(dopplerfinder_process.get())
+                        print("Process done.")
+                        self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+                        print("Spectra rows:", self.spectra.shape[0])
+                        #i = 0
+                        print("New i:", i)
 
 
 """
+    def work(self, input_items, output_items):
+        #while True:
+        #matrix = []
+        if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
+            i = 0
+            print("Buffer spectrum row #:", i, "/60")
+            #print("Adding next vector to spectra...", input_items[0][i])
+            #print("input_items[0][i] shape:", input_items[0][i].shape)
+            print("input_items[0]", input_items[0])
+            print("input_items[0] shape:", input_items[0].shape)
+            print("spectra shape:", self.spectra.shape)
+            # self.spectra[self.buffer_spectrum, :] = input_items.copy()
+            #matrix[i] = input_items[0]
+            self.spectra = np.append(self.spectra, input_items[0], axis=0)
+            print("Done.")
+            print("New spectra shape:", self.spectra.shape)
+            #self.buffer_spectrum +=1
+            i += 1
+            print("Upcoming row #:", i, "/60") #self.buffer_spectrum)
+        else:
+            #print("60 * 1e6 matrix accumulated.")
+            #print("Sending to DopplerFinder...")
+            if __name__ == "__main__":
+            #parent_conn, child_conn = Pipe()
+                print("spectra:", self.spectra)
+                print("spectra size:", self.spectra.size)
+                print("Creating DopplerFinder process...")
+                dopplerfinder_process = mp.Process(target=apply_turboseti)
+                print("Starting DopplerFinder process...")
+                dopplerfinder_process.start()
+                dopplerfinder_process.join()
+                print("Clancy done searching for ET!")
+                self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32)
+                print("spectra rows:", self.spectra.size[0])
+                i = 0
+                print("New i:", i)
+
+
+
     def work(self, input_items, output_items):
 
 
