@@ -119,7 +119,7 @@ class find_et_sync(gr.sync_block):
                         i += 1
                         if DEBUGGING:
                             print("DEBUG Upcoming row #:", i, "/60")
-                        return(len(input_items[0]))
+                        return len(input_items[0])
                     else:
                         if DEBUGGING:
                             print("Spectra:", self.spectra)
@@ -134,4 +134,4 @@ class find_et_sync(gr.sync_block):
                             print("Spectra rows:", self.spectra.shape[0])
                             #i = 0
                             print("New i:", i)
-                        return(len(input_items[0]))
+                        return len(input_items[0])
