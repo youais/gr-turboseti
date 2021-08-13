@@ -140,9 +140,9 @@ inputs:
 #      * dtype
 #      * vlen
 #      * optional (set to 1 for optional inputs)
-- label: out
-  domain: message
-  optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+#- label: out
+#  domain: message
+#  optional: 1 #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
 
 templates:
   imports: import turboseti

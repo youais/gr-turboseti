@@ -24,6 +24,7 @@ import numpy
 import logging #make sure this is here
 from gnuradio import gr
 
+DEBUGGING = True
 
 class find_et_buffer(gr.basic_block):
     """
@@ -34,19 +35,53 @@ class find_et_buffer(gr.basic_block):
         self.n_fine_chans = n_fine_chans
         self.n_ints_in_file = n_ints_in_file
 
+        self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+
         gr.basic_block.__init__(self,
             name="find_et_buffer",
             in_sig=[(np.float32, self.n_fine_chans)],
             out_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))])
 
-    def forecast(self, noutput_items, ninput_items_required):
+    #def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
-        #ninput_items_required =
-
-        for i in range(len(ninput_items_required)):
-            ninput_items_required[i] = noutput_items
+        #for i in range(len(ninput_items_required)):
+        #    ninput_items_required[i] = noutput_items
 
     def general_work(self, input_items, output_items):
-        output_items[0][:] = input_items[0]
-        consume(0, len(input_items[0]))        #self.consume_each(len(input_items[0]))
-        return len(output_items[0])
+        #output_items[0][:] = input_items[0]
+        #consume(0, len(input_items[0]))        #self.consume_each(len(input_items[0]))
+        #return len(output_items[0])
+
+        i = 0
+        j = 0
+
+        if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
+            if DEBUGGING:
+                print("DEBUG Buffer spectra row #:", i,"/60")
+                print("DEBUG Incoming vector #:", j)
+                print("DEBUG Incoming vector, i.e. 'input_items[0]':", input_items[0])
+                print("DEBUG Incoming vector shape:", input_items[0].shape)
+                print("DEBUG Initial spectra shape:", self.spectra.shape)
+            self.spectra = np.append(self.spectra, input_items[0], axis=0)
+            if DEBUGGING:
+                print("DEBUG New row appended. New spectra shape:", self.spectra.shape)
+            i += 1
+            j += 1
+            if DEBUGGING:
+                print("DEBUG Next spectrum row #:", i,"/60")
+                print("DEBUG Next vector #:", j)
+            #return len(input_items[0])
+        else:
+            if DEBUGGING:
+                print("DEBUG Current spectra:", self.spectra)
+                print("DEBUG Current spectra shape:", self.spectra.shape)
+            output_items[0] = self.spectra
+            consume(0, len(self.spectra))
+            #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+            #i = 0
+            #if DEBUGGING:
+            #    print("DEBUG Reset spectra shape:", self.spectra.shape[0])
+            #    print("DEBUG Next spectra row:", i,"/60")
+            #    print("DEBUG Next vector #:", j)
+
+            return len(output_items[0])
