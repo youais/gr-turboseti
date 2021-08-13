@@ -13,10 +13,13 @@ DEBUGGING = True
 n_fine_chans = 1000000
 n_ints_in_file = 60
 
-spectra = np.empty((0, n_fine_chans), dtype=np.float32, order='C')
+# spectra = np.empty((0, n_fine_chans), dtype=np.float32, order='C')
 
 input_items = np.random.rand(181, 1, 1000000)
 
+
+
+"""
 i = 0
 j = 0
 
@@ -51,3 +54,4 @@ while True:
         #i = 0
         #print("New i:", i)
         print(len(output_items[0]))
+"""

@@ -114,6 +114,7 @@ class find_et_sync(gr.sync_block):
     def work(self, input_items, output_items):
         i = 0
         j = 0
+        print(input_items[0])
         with self.get_context_pool as pool:
             while True:
                 if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60

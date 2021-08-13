@@ -27,13 +27,23 @@ from turboseti_stream.turboseti_stream import DopplerFinder
 
 DEBUGGING = True
 
-class find_et(gr.basic_block):
+class find_et(gr.sync_block):
+
+    """
+    This is the script for the DopplerFinder block, which runs an adapted version of
+    turboSETI on a numpy float32 data matrix stored in RAM.
+
+    Yiwei Chai
+    Last updated August 13, 2021
+
+    """
 
     def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
                     flagging, obs_info, append_output, blank_dc,
                     kernels, gpu_backend, precision, gpu_id):
 
+        # Define parameters which need to be passed into DopplerFinder class
         self.filename = filename
         self.source_name = source_name
         self.src_raj = src_raj
@@ -69,12 +79,6 @@ class find_et(gr.basic_block):
         self.precision = precision
         self.gpu_id = gpu_id
 
-        # Create empty matrix with correct shape
-        #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-
-        #self.get_context_pool = mp.get_context("spawn").Pool(processes=1)
-        #self.pool = mp.Pool(processes=1)
-
         gr.sync_block.__init__(self,
             name="DopplerFinder",
             in_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))], #this should be vector float32, specify size = 1e6?
@@ -83,8 +87,11 @@ class find_et(gr.basic_block):
 
     def work(self, input_items, output_items):
 
-        spectra = np.squeeze(input_items[0])
+        if DEBUGGING:
+            print("input_items[0] shape:", input_items[0].shape") # Checks input is expected shape (60, 1e6)
 
+        #spectra = np.squeeze(input_items[0]) --> use with basic_block
+        spectra = input_items[0] # Use with interp_block
         if DEBUGGING:
             print("DEBUG Current spectra:", spectra)
             print("DEBUG Current spectra shape:", spectra.shape)
