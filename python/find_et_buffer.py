@@ -54,34 +54,33 @@ class find_et_buffer(gr.basic_block):
 
         i = 0
         j = 0
-
-        if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
-            if DEBUGGING:
-                print("DEBUG Buffer spectra row #:", i,"/60")
-                print("DEBUG Incoming vector #:", j)
-                print("DEBUG Incoming vector, i.e. 'input_items[0]':", input_items[0])
-                print("DEBUG Incoming vector shape:", input_items[0].shape)
-                print("DEBUG Initial spectra shape:", self.spectra.shape)
-            self.spectra = np.append(self.spectra, input_items[0], axis=0)
-            if DEBUGGING:
-                print("DEBUG New row appended. New spectra shape:", self.spectra.shape)
-            i += 1
-            j += 1
-            if DEBUGGING:
-                print("DEBUG Next spectrum row #:", i,"/60")
-                print("DEBUG Next vector #:", j)
-            #return len(input_items[0])
-        else:
-            if DEBUGGING:
-                print("DEBUG Current spectra:", self.spectra)
-                print("DEBUG Current spectra shape:", self.spectra.shape)
-            output_items[0] = self.spectra
-            consume(0, len(self.spectra))
-            #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-            #i = 0
-            #if DEBUGGING:
-            #    print("DEBUG Reset spectra shape:", self.spectra.shape[0])
-            #    print("DEBUG Next spectra row:", i,"/60")
-            #    print("DEBUG Next vector #:", j)
-
-            return len(output_items[0])
+        while True:
+            if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
+                if DEBUGGING:
+                    print("DEBUG Buffer spectra row #:", i,"/60")
+                    print("DEBUG Incoming vector #:", j)
+                    print("DEBUG Incoming vector, i.e. 'input_items[0]':", input_items[0])
+                    print("DEBUG Incoming vector shape:", input_items[0].shape)
+                    print("DEBUG Initial spectra shape:", self.spectra.shape)
+                self.spectra = np.append(self.spectra, input_items[0], axis=0)
+                if DEBUGGING:
+                    print("DEBUG New row appended. New spectra shape:", self.spectra.shape)
+                i += 1
+                j += 1
+                if DEBUGGING:
+                    print("DEBUG Next spectrum row #:", "%/60" %i)
+                    print("DEBUG Next vector #:", j)
+                #consume(0, len(input_items[0]))
+            else:
+                if DEBUGGING:
+                    print("DEBUG Current spectra:", self.spectra)
+                    print("DEBUG Current spectra shape:", self.spectra.shape)
+                output_items[0] = self.spectra
+                #consume(0, len(self.spectra))
+                #output_items[0] = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+                #i = 0
+                #if DEBUGGING:
+                #    print("DEBUG Reset spectra shape:", self.spectra.shape[0])
+                #    print("DEBUG Next spectra row:", i,"/60")
+                #    print("DEBUG Next vector #:", j)
+        return len(output_items[0])

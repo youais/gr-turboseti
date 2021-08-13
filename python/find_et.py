@@ -76,14 +76,14 @@ class find_et(gr.basic_block):
         #self.pool = mp.Pool(processes=1)
 
         gr.sync_block.__init__(self,
-            name="DopplerFinder Sink",
+            name="DopplerFinder",
             in_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))], #this should be vector float32, specify size = 1e6?
             out_sig=None)
 
 
     def work(self, input_items, output_items):
 
-        spectra = input_items[0]
+        spectra = np.squeeze(input_items[0])
 
         if DEBUGGING:
             print("DEBUG Current spectra:", spectra)
@@ -96,7 +96,7 @@ class find_et(gr.basic_block):
                             self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)
         print("Clancy is looking for ET...")
-        clancy.find_ET(self.spectra)
+        clancy.find_ET(spectra)
         print("Clancy is done.")
 
         return len(spectra)
