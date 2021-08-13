@@ -16,6 +16,24 @@ This code has been tested on Linux.
 - [gr-ata OOT module](https://github.com/SETIatHCRO/gr-ata) (not necessary for this module, but needed to run ATA observations)
 
 
+### Installing `gr-turboseti`
+
+- `git clone https://github.com/youais/gr-turboseti.git`
+- `cd gr-turboseti`
+- `mkdir build`
+- `cd build`
+- `cmake ../` (you may need to specify the path)
+- `sudo make install`
+- `sudo ldconfig` (for Linux users)
+
+### Navigating this Github Repo
+
+- [`/python`](https://github.com/youais/gr-turboseti/tree/master/python) -- python source code for blocks
+- [`/grc`](https://github.com/youais/gr-turboseti/tree/master/grc) -- .yml code for blocks' appearance in GNU Radio Companion (GRC)
+- [`/lib`](https://github.com/youais/gr-turboseti/tree/master/lib) -- C++ source code for blocks (not used in this module bc I don't know C++ :P)
+- [`/examples`](https://github.com/youais/gr-turboseti/tree/master/examples) -- Examples of flowgraph and `turboseti_stream` output
+
+
 ### Background
 
 This project was undertaken as part of the Berkeley SETI Research Center 2021 summer REU. My mentors were Dr. Wael Farah (SETI Institute), and Dr. Steve Croft (Breakthrough Listen, UC Berkeley).
@@ -40,7 +58,7 @@ Example flowgraph (refer to examples folder for .grc file):
 ### Next Steps
 
 1. Integrate DopplerFinder Sink block into GNU Radio (current issue: `TypeError: cannot pickle 'SwigPyObject' object`)
-2. Optional: Automate plotting of dynamic spectra of hits
+2. _Optional: Automate plotting of dynamic spectra of hits_
 3. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
 4. Turn `gr-turboseti` into PyPi package
 5. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
