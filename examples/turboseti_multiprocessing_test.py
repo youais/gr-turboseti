@@ -3,6 +3,17 @@ import numpy as np
 import logging
 from main import DopplerFinder
 
+"""
+
+This is an example of the intended output of the DopplerFinder Sink GNU Radio block.
+
+Issues:
+- Certain aspects not transferable to GNU Radio
+    - __name__ == "__main__" cannot be called in class, must be placed outside work()
+    - Pool() should be defined in __init__ so as to be preserved across all calls to work()
+
+"""
+
 def apply_turboseti(spectra, filename, source_name, src_raj, src_dej,
                     tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr,
@@ -78,38 +89,3 @@ if __name__ == "__main__":
                 print("Spectra rows:", spectra.shape[0])
                 #i = 0
                 print("New i:", i)
-'''
-while True:
-    if spectra.shape[0] < n_ints_in_file: # spectra rows < 60
-        print("Buffer spectrum row #:", i, "/60")
-        print("input_items[0]", input_items[i])
-        print("input_items[0] shape:", input_items[i].shape)
-        print("spectra shape:", spectra.shape)
-        spectra = np.append(spectra, input_items[i], axis=0)
-        print("Done.")
-        print("New spectra shape:", spectra.shape)
-        i += 1
-        print("Upcoming row #:", i, "/60")
-    else:
-        if __name__ == "__main__":
-
-            #dopplerfinder_process = apply_turboseti(spectra, filename, source_name, src_raj, src_dej,
-            #                    tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-            #                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr,
-            #                    out_dir, flagging, obs_info, append_output, blank_dc,
-            #                    kernels, gpu_backend, precision, gpu_id)
-            with mp.Pool(processes=1) as pool:
-                print("Creating DopplerFinder process...")
-                dopplerfinder_process = pool.apply_async(func=apply_turboseti, args=(spectra, filename, source_name, src_raj, src_dej,
-                                tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                                log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr,
-                                out_dir, flagging, obs_info, append_output, blank_dc,
-                                kernels, gpu_backend, precision, gpu_id))
-                print("Starting DopplerFinder process...")
-                print(dopplerfinder_process.get())
-                print("Process done.")
-                spectra = np.empty((0, n_fine_chans), dtype=np.float32, order='C')
-                print("Spectra rows:", spectra.shape[0])
-                #i = 0
-                print("New i:", i)
-'''
