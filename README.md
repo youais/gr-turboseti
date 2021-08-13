@@ -16,6 +16,28 @@ This code has been tested on Linux.
 - [gr-ata OOT module](https://github.com/SETIatHCRO/gr-ata) (not necessary for this module, but needed to run ATA observations)
 
 
+### Installing `gr-turboseti`
+
+```
+git clone https://github.com/youais/gr-turboseti.git
+cd gr-turboseti
+mkdir build
+cd build
+cmake ../
+sudo make install
+sudo ldconfig #for Linux users
+```
+You may need to specify the install path when running `cmake`.
+
+
+### Navigating this Github Repo
+
+- [`/python`](https://github.com/youais/gr-turboseti/tree/master/python) -- Python source code for blocks
+- [`/grc`](https://github.com/youais/gr-turboseti/tree/master/grc) -- `.yml` code for blocks' appearance in GNU Radio Companion (GRC)
+- [`/lib`](https://github.com/youais/gr-turboseti/tree/master/lib) -- C++ source code for blocks
+- [`/examples`](https://github.com/youais/gr-turboseti/tree/master/examples) -- Examples of flowgraph and `turboseti_stream` output
+
+
 ### Background
 
 This project was undertaken as part of the Berkeley SETI Research Center 2021 summer REU. My mentors were Dr. Wael Farah (SETI Institute), and Dr. Steve Croft (Breakthrough Listen, UC Berkeley).
@@ -40,7 +62,7 @@ Example flowgraph (refer to examples folder for .grc file):
 ### Next Steps
 
 1. Integrate DopplerFinder Sink block into GNU Radio (current issue: `TypeError: cannot pickle 'SwigPyObject' object`)
-2. Optional: Automate plotting of dynamic spectra of hits
+2. _Optional: Automate plotting of dynamic spectra of hits_
 3. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
 4. Turn `gr-turboseti` into PyPi package
 5. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
@@ -50,7 +72,7 @@ I plan to continue working on this project into the academic year.
 
 ### Acknowledgements
 
-Richard Elkins and Luigi Cruz did a significant amount of work on developing `turboseti_stream`. Luigi also helped greatly with the structure of the flowgraph, particularly the polyphase filterbank and FFT components. Daniel Estévez and Derek Kozel answered many, many questions about GNU Radio, OOT modules, and using Python multiprocessing. Lastly, Wael Farah was very patient and helped me wade through a hordes upon hordes of bugs.
+Richard Elkins and Luigi Cruz did a significant amount of work on developing `turboseti_stream`. Luigi also helped greatly with the structure of the flowgraph, particularly the polyphase filterbank and FFT components. Daniel Estévez and Derek Kozel answered many, many questions about GNU Radio, OOT modules, and using Python multiprocessing. Lastly, Wael Farah was very patient while helping me wade through hordes upon hordes of bugs.
 
 Thank you all!
 
