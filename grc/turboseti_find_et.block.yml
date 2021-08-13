@@ -131,9 +131,9 @@ parameters:
 inputs:
 - label: in
   #domain: stream
-  dtype: float
+  #dtype:
   #vlen: ...
-  optional: 1
+  #optional: 1
 
 #  Make one 'outputs' list entry per output. Sub-entries of dictionary:
 #      * label (an identifier for the GUI)

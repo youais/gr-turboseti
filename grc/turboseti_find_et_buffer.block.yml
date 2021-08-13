@@ -25,7 +25,7 @@ inputs:
 - label: in
   #domain: ...
   dtype: float
-  #vlen: ...
+  vlen: ${vlen_in}
 
 #  Make one 'outputs' list entry per output. Sub-entries of dictionary:
 #      * label (an identifier for the GUI)
@@ -36,9 +36,11 @@ outputs:
 - label: out
   #domain: ...
   dtype: float #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+  vlen: ${vlen_out}
 
 templates:
   imports: import turboseti
-  make: turboseti.find_et_buffer(${n_fine_chans}, ${n_ints_in_file})
+  make: turboseti.find_et_buffer(${n_fine_chans}, ${n_ints_in_file},
+        ${vlen_in}, ${vlen_out})
 
 file_format: 1
