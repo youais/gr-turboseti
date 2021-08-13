@@ -7,7 +7,7 @@ The module currently consists of 3 blocks:
 - [DopplerFinder Buffer](https://github.com/youais/gr-turboseti/blob/master/python/find_et_buffer.py)
 - [DopplerFinder Sink](https://github.com/youais/gr-turboseti/blob/master/python/find_et_sync.py)
 
-The `DopplerFinder Sink` block seeks to combine the functions of both `DopplerFinder Buffer` and `DopplerFinder`. For a good example of the intended output of `DopplerFinder Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py). However, it is possible that multiprocessing is incompatible with 
+The `DopplerFinder Sink` block seeks to combine the functions of both `DopplerFinder Buffer` and `DopplerFinder`. For a good example of the intended output of `DopplerFinder Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py). 
 
 This code has been tested on Linux.
 
@@ -71,7 +71,7 @@ Working:
 
 Issues:
 - `DopplerFinder Buffer` block -- refer to script for more details
-- `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`
+- `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`. It is possible that this issue may be fatal.
 
 ### Next Steps
 
