@@ -131,7 +131,7 @@ parameters:
 inputs:
 - label: in
   #domain: stream
-  #dtype: ${ type }
+  dtype: float
   #vlen: ...
   optional: 1
 

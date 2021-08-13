@@ -20,7 +20,7 @@
 #
 
 
-import numpy
+import numpy as np
 import logging #make sure this is here
 from gnuradio import gr
 

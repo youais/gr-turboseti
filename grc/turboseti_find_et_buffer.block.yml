@@ -11,7 +11,6 @@ parameters:
 - id: n_fine_chans
   label: No. of fine channels
   dtype: int
-  category: Channels
 - id: n_ints_in_file
   label: No. of integrations in file
   dtype: int
@@ -25,7 +24,7 @@ parameters:
 inputs:
 - label: in
   #domain: ...
-  #dtype: ...
+  dtype: float
   #vlen: ...
 
 #  Make one 'outputs' list entry per output. Sub-entries of dictionary:
@@ -36,7 +35,7 @@ inputs:
 outputs:
 - label: out
   #domain: ...
-  #dtype: ... #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+  dtype: float #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
 
 templates:
   imports: import turboseti
