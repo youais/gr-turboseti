@@ -1,9 +1,6 @@
-import multiprocessing as mp
-import numpy as np
-import logging
-from main import DopplerFinder
-
 """
+
+Yiwei Chai, 2021
 
 This is an example of the intended output of the DopplerFinder Sink GNU Radio block.
 
@@ -11,8 +8,13 @@ Issues:
 - Certain aspects not transferable to GNU Radio
     - __name__ == "__main__" cannot be called in class, must be placed outside work()
     - Pool() should be defined in __init__ so as to be preserved across all calls to work()
-
+    
 """
+
+import multiprocessing as mp
+import numpy as np
+import logging
+from main import DopplerFinder
 
 def apply_turboseti(spectra, filename, source_name, src_raj, src_dej,
                     tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
