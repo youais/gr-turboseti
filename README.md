@@ -25,7 +25,7 @@ mkdir build
 cd build
 cmake ../
 sudo make install
-sudo ldconfig` (for Linux users)
+sudo ldconfig #for Linux users
 ```
 You may need to specify the install path when running `cmake`.
 
