@@ -30,7 +30,7 @@ DEBUGGING = True
 class find_et_sync(gr.sync_block):
 
     """
-    find_et_sync describes the necessary functions for the DopplerFinder Sink
+    find_et_sync contains the necessary functions for the DopplerFinder Sink
     block. DopplerFinder Sink is part of the gr-turboseti GNU Radio OOT module,
     and can be used with gr-ata to perform near-synchronous turboSETI analysis
     on 60 second packets of ATA antenna data stored in RAM.
