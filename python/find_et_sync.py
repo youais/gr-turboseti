@@ -82,8 +82,9 @@ class find_et_sync(gr.sync_block):
 
         # Create empty matrix with correct shape
         self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-        #self.spectra = np.zeros((self.n_ints_in_file, self.n_fine_chans), dtype=np.float32) #, order='C' for column major, order='F' for row major
-        #self.buffer_spectrum = 0
+
+        self.get_context_pool = mp.get_context("spawn").Pool(processes=1)
+        #self.pool = mp.Pool(processes=1)
 
         gr.sync_block.__init__(self,
             name="DopplerFinder Sink",
@@ -91,7 +92,6 @@ class find_et_sync(gr.sync_block):
             out_sig=None)
 
     def apply_turboseti(self):
-
         print("Initialising Clancy...")
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
@@ -102,36 +102,54 @@ class find_et_sync(gr.sync_block):
         clancy.find_ET(self.spectra)
         print("Clancy is done.")
 
+    #def multiprocessing_buffer(self, input_items):
+    def __getstate__(self):
+        self_dict = self.__dict__.copy()
+        del self_dict['pool']
+        return self_dict
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+
     def work(self, input_items, output_items):
         i = 0
-        if __name__ == "__main__":
-            with mp.Pool(processes=1) as pool:
-                while True:
-                    if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
-                        if DEBUGGING:
-                            print("DEBUG Buffer spectrum row #:", i, "/60")
-                            print("DEBUG input_items[0]", input_items[0])
-                            print("DEBUG input_items[0] shape:", input_items[0].shape)
-                            print("DEBUG spectra shape:", self.spectra.shape)
-                        spectra = np.append(self.spectra, input_items[0], axis=0)
-                        if DEBUGGING:
-                            print("DEBUG New row appended. New spectra shape:", self.spectra.shape)
-                        i += 1
-                        if DEBUGGING:
-                            print("DEBUG Upcoming row #:", i, "/60")
-                        return(len(input_items[0]))
-                    else:
-                        if DEBUGGING:
-                            print("Spectra:", self.spectra)
-                            print("Spectra shape:", self.spectra.shape)
-                        print("Creating DopplerFinder process...")
-                        dopplerfinder_process = pool.apply_async(func=apply_turboseti, args=(self,))
-                        print("Starting DopplerFinder process...")
-                        print(dopplerfinder_process.get())
-                        print("Process done.")
-                        self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-                        if DEBUGGING:
-                            print("Spectra rows:", self.spectra.shape[0])
-                            #i = 0
-                            print("New i:", i)
-                        return(len(input_items[0]))
+        j = 0
+        with self.get_context_pool as pool:
+            while True:
+                if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
+                    if DEBUGGING:
+                        print("DEBUG Buffer spectra row #:", i,"/60")
+                        print("DEBUG Incoming vector #:", j)
+                        print("DEBUG Incoming vector, i.e. 'input_items[0]':", input_items[0])
+                        print("DEBUG Incoming vector shape:", input_items[0].shape)
+                        print("DEBUG Initial spectra shape:", self.spectra.shape)
+                    self.spectra = np.append(self.spectra, input_items[0], axis=0)
+                    if DEBUGGING:
+                        print("DEBUG New row appended. New spectra shape:", self.spectra.shape)
+                    i += 1
+                    j += 1
+                    if DEBUGGING:
+                        print("DEBUG Next spectrum row #:", i,"/60")
+                        print("DEBUG Next vector #:", j)
+                    #return len(input_items[0])
+                else:
+                    if DEBUGGING:
+                        print("DEBUG Current spectra:", self.spectra)
+                        print("DEBUG Current spectra shape:", self.spectra.shape)
+                    print("Creating DopplerFinder process...")
+                    dopplerfinder_process = pool.apply_async(func=self.apply_turboseti, args=(self,))
+                    print("Starting DopplerFinder process...")
+                    print(dopplerfinder_process.get())
+                    print("Process done.")
+                    self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+                    i = 0
+                    if DEBUGGING:
+                        print("DEBUG Reset spectra shape:", self.spectra.shape[0])
+                        #i = 0
+                        print("DEBUG Next spectra row:", i,"/60")
+                        print("DEBUG Next vector #:", j)
+        print("Pls let this work. If this prints, then it's working (probs??)")
+        return len(input_items[0])
+
+if __name__ == "__main__":
+    find_et_sync().run()
