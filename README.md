@@ -40,7 +40,7 @@ You may need to specify the install path when running `cmake`.
 - [`/python`](https://github.com/youais/gr-turboseti/tree/master/python) -- Python source code for blocks
 - [`/grc`](https://github.com/youais/gr-turboseti/tree/master/grc) -- `.yml` code for blocks' appearance in GNU Radio Companion (GRC)
 - [`/lib`](https://github.com/youais/gr-turboseti/tree/master/lib) -- C++ source code for blocks
-- [`/examples`](https://github.com/youais/gr-turboseti/tree/master/examples) -- Examples of flowgraph and `turboseti_stream` output
+- [`/examples`](https://github.com/youais/gr-turboseti/tree/master/examples) -- Examples of flowgraph and `turboseti_stream` output, as well as observation planning code
 
 
 ### Background
