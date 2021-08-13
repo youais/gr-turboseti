@@ -32,9 +32,9 @@ You may need to specify the install path when running `cmake`.
 
 ### Navigating this Github Repo
 
-- [`/python`](https://github.com/youais/gr-turboseti/tree/master/python) -- python source code for blocks
+- [`/python`](https://github.com/youais/gr-turboseti/tree/master/python) -- Python source code for blocks
 - [`/grc`](https://github.com/youais/gr-turboseti/tree/master/grc) -- `.yml` code for blocks' appearance in GNU Radio Companion (GRC)
-- [`/lib`](https://github.com/youais/gr-turboseti/tree/master/lib) -- C++ source code for blocks (not used in this module bc I don't know C++ :P)
+- [`/lib`](https://github.com/youais/gr-turboseti/tree/master/lib) -- C++ source code for blocks
 - [`/examples`](https://github.com/youais/gr-turboseti/tree/master/examples) -- Examples of flowgraph and `turboseti_stream` output
 
 
