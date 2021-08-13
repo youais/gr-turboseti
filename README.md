@@ -1,8 +1,13 @@
 # A turboSETI block for GNU Radio
 
-This is a GNU Radio Out of Tree (OOT) module for the `DopplerFinder Sink` block. The aim of `DopplerFinder Sink` is to perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM.
+This is a GNU Radio Out of Tree (OOT) module for the `DopplerFinder` blocks. The aim is to create a GNU Radio block that can perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM.
 
-For a good example of the intended output of `DopplerFinder Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py).
+The module currently consists of 3 blocks:
+- [DopplerFinder](https://github.com/youais/gr-turboseti/blob/master/python/find_et.py)
+- [DopplerFinder Buffer](https://github.com/youais/gr-turboseti/blob/master/python/find_et_buffer.py)
+- [DopplerFinder Sink](https://github.com/youais/gr-turboseti/blob/master/python/find_et_sync.py)
+
+The `DopplerFinder Sink` block seeks to combine the functions of both `DopplerFinder Buffer` and `DopplerFinder`. For a good example of the intended output of `DopplerFinder Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py). However, it is possible that multiprocessing is incompatible with 
 
 This code has been tested on Linux.
 
@@ -59,13 +64,22 @@ Example flowgraph (refer to examples folder for .grc file):
 <img width="1280" alt="usrp_test_flowgraph" src="https://user-images.githubusercontent.com/54188486/129296704-577b0380-6899-47f4-8a7c-d9cf56200835.png">
 
 
+### Outcome (as of August 13, 2021)
+
+Working:
+- `DopplerFinder` block
+
+Issues:
+- `DopplerFinder Buffer` block -- refer to script for more details
+- `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`
+
 ### Next Steps
 
-1. Integrate DopplerFinder Sink block into GNU Radio (current issue: `TypeError: cannot pickle 'SwigPyObject' object`)
-2. _Optional: Automate plotting of dynamic spectra of hits_
-3. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
-4. Turn `gr-turboseti` into PyPi package
-5. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
+1. Fully integrate DopplerFinder Sink OR DopplerFinder Buffer block into GNU Radio
+3. _Optional: Automate plotting of dynamic spectra of hits_
+4. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
+5. Turn `gr-turboseti` into PyPi package
+6. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
 
 I plan to continue working on this project into the academic year.
 
