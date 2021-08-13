@@ -72,7 +72,7 @@ I plan to continue working on this project into the academic year.
 
 ### Acknowledgements
 
-Richard Elkins and Luigi Cruz did a significant amount of work on developing `turboseti_stream`. Luigi also helped greatly with the structure of the flowgraph, particularly the polyphase filterbank and FFT components. Daniel Estévez and Derek Kozel answered many, many questions about GNU Radio, OOT modules, and using Python multiprocessing. Lastly, Wael Farah was very patient and helped me wade through a hordes upon hordes of bugs.
+Richard Elkins and Luigi Cruz did a significant amount of work on developing `turboseti_stream`. Luigi also helped greatly with the structure of the flowgraph, particularly the polyphase filterbank and FFT components. Daniel Estévez and Derek Kozel answered many, many questions about GNU Radio, OOT modules, and using Python multiprocessing. Lastly, Wael Farah was very patient while helping me wade through hordes upon hordes of bugs.
 
 Thank you all!
 
