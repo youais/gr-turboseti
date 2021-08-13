@@ -1,15 +1,15 @@
 # A turboSETI block for GNU Radio
 
-This is a GNU Radio Out of Tree (OOT) Module for the DopplerFinder Sink block. The aim of DopplerFinder Sink is to perform turboSETI analysis on a numpy.float32 data matrix stored in RAM. 
+This is a GNU Radio Out of Tree (OOT) Module for the DopplerFinder Sink block. The aim of DopplerFinder Sink is to perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM. 
 
 This code has been tested on Linux.
 
 ### Dependencies
 
-- turboseti-stream
-- turboSETI
-- blimpy
-- GNU Radio version 3.8
+- [turboseti-stream](https://github.com/luigifcruz/turboseti-stream)
+- [turboSETI]
+- [blimpy]
+- [GNU Radio version 3.8]
 
 ### Background
 
