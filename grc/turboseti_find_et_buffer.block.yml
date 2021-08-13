@@ -8,12 +8,12 @@ category: '[turboSETI]'
 #     * label
 #     * dtype
 parameters:
-- id: vlen_in
-  label: Input vector length
-  dtype: int
-- id: vlen_out
-  label: Output vector length
-  dtype: int
+#- id: vlen_in
+#  label: Input vector length
+#  dtype: int
+#- id: vlen_out
+#  label: Output vector length
+#  dtype: int
 - id: n_fine_chans
   label: No. of fine channels
   dtype: int
@@ -30,8 +30,8 @@ parameters:
 inputs:
 - label: in
   #domain: ...
-  dtype: float
-  vlen: ${vlen_in}
+  #dtype: float
+  #vlen: ${vlen_in}
 
 #  Make one 'outputs' list entry per output. Sub-entries of dictionary:
 #      * label (an identifier for the GUI)
@@ -41,12 +41,12 @@ inputs:
 outputs:
 - label: out
   #domain: ...
-  dtype: float #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
-  vlen: ${vlen_out}
+  #dtype: float #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+  #vlen: ${vlen_out}
 
 templates:
   imports: import turboseti
-  make: turboseti.find_et_buffer(${n_fine_chans}, ${n_ints_in_file},
-        ${vlen_in}, ${vlen_out})
+  make: turboseti.find_et_buffer(${n_fine_chans}, ${n_ints_in_file})
+        #${vlen_in}, ${vlen_out})
 
 file_format: 1
