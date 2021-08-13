@@ -2,7 +2,7 @@
 
 This is a GNU Radio Out of Tree (OOT) module for the `DopplerFinder Sink` block. The aim of `DopplerFinder Sink` is to perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM.
 
-For a good example of the intended output of `DopplerFinder Sink`, refer to `ts_multiprocessing_test.py`.
+For a good example of the intended output of `DopplerFinder Sink`, refer to `ts_multiprocessing_test.py` in the examples folder.
 
 This code has been tested on Linux.
 
