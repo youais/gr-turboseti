@@ -18,18 +18,22 @@ This code has been tested on Linux.
 
 ### Installing `gr-turboseti`
 
-- `git clone https://github.com/youais/gr-turboseti.git`
-- `cd gr-turboseti`
-- `mkdir build`
-- `cd build`
-- `cmake ../` (you may need to specify the path)
-- `sudo make install`
-- `sudo ldconfig` (for Linux users)
+```
+git clone https://github.com/youais/gr-turboseti.git
+cd gr-turboseti
+mkdir build
+cd build
+cmake ../
+sudo make install
+sudo ldconfig` (for Linux users)
+```
+You may need to specify the install path when running `cmake`.
+
 
 ### Navigating this Github Repo
 
 - [`/python`](https://github.com/youais/gr-turboseti/tree/master/python) -- python source code for blocks
-- [`/grc`](https://github.com/youais/gr-turboseti/tree/master/grc) -- .yml code for blocks' appearance in GNU Radio Companion (GRC)
+- [`/grc`](https://github.com/youais/gr-turboseti/tree/master/grc) -- `.yml` code for blocks' appearance in GNU Radio Companion (GRC)
 - [`/lib`](https://github.com/youais/gr-turboseti/tree/master/lib) -- C++ source code for blocks (not used in this module bc I don't know C++ :P)
 - [`/examples`](https://github.com/youais/gr-turboseti/tree/master/examples) -- Examples of flowgraph and `turboseti_stream` output
 
