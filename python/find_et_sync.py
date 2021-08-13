@@ -113,7 +113,6 @@ class find_et_sync(gr.sync_block):
 
     def work(self, input_items, output_items):
         i = 0
-<<<<<<< HEAD
         j = 0
         with self.get_context_pool as pool:
             while True:
