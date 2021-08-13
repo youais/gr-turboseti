@@ -1,8 +1,11 @@
 # A turboSETI block for GNU Radio
 
-This is a GNU Radio Out of Tree (OOT) module for the `DopplerFinder Sink` block. The aim of `DopplerFinder Sink` is to perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM. 
+This is a GNU Radio Out of Tree (OOT) module for the `DopplerFinder Sink` block. The aim of `DopplerFinder Sink` is to perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM.
+
+For a good example of the intended output of `DopplerFinder Sink`, refer to `ts_multiprocessing_test.py`.
 
 This code has been tested on Linux.
+
 
 ### Dependencies
 
@@ -12,6 +15,7 @@ This code has been tested on Linux.
 - [GNU Radio version 3.8](https://wiki.gnuradio.org/index.php/InstallingGR)
 - [gr-ata OOT module](https://github.com/SETIatHCRO/gr-ata) (not necessary for this module, but needed to run ATA observations)
 
+
 ### Background
 
 This project was undertaken as part of the Berkeley SETI Research Center 2021 summer REU. My mentors were Dr. Wael Farah (SETI Institute), and Dr. Steve Croft (Breakthrough Listen, UC Berkeley).
@@ -19,6 +23,7 @@ This project was undertaken as part of the Berkeley SETI Research Center 2021 su
 The aim of my project is to develop a SETI data processing pipeline for the Allen Telescope Array (ATA), using GNU Radio. The ATA is a radio interferometer operated by the SETI Institute at the Hat Creek Radio Observatory in California, and consists of 42 fully-steerable antennae, each 6.1m in diameter. Its main science goal is to perform searches for technosignatures, which appear as narrowband signals 'drifting' in frequency. 
 
 Currently, the existing data-processing pipeline for the ATA uses custom hardware unavailable to those not on-site. GNU Radio is a free open-source software for developing signal-processing routines, and is used by a large community of amateur radio astronomers and enthusiasts. The implementation of a GNU Radio SETI pipeline will make the search for extraterrestrial intelligence more accesible to smaller radio observatories and citizen scientists.
+
 
 ### Pipeline Details
 
@@ -28,7 +33,7 @@ The GNU Radio SETI pipeline is outlined as follows:
 3. This product accumulates in DopplerFinder Sink's internal buffer for ~60s, to create a data matrix of shape (60, 1e6)
 4. An adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) analyses this data matrix for potential technosignatures
 
-Example flowgraph (.grc file in examples folder):
+Example flowgraph (refer to examples folder for .grc file):
 <img width="1280" alt="usrp_test_flowgraph" src="https://user-images.githubusercontent.com/54188486/129296704-577b0380-6899-47f4-8a7c-d9cf56200835.png">
 
 
@@ -42,6 +47,7 @@ Example flowgraph (.grc file in examples folder):
 
 I plan to continue working on this project into the academic year.
 
+
 ### Acknowledgements
 
 Richard Elkins and Luigi Cruz did a significant amount of work on developing `turboseti_stream`. Luigi also helped greatly with the structure of the flowgraph, particularly the polyphase filterbank and FFT components. Daniel Estévez and Derek Kozel answered many, many questions about GNU Radio, OOT modules, and using Python multiprocessing. Lastly, Wael Farah was very patient and helped me wade through a hordes upon hordes of bugs.
@@ -49,6 +55,7 @@ Richard Elkins and Luigi Cruz did a significant amount of work on developing `tu
 Thank you all!
 
 This project was made possible by funding from Breakthrough Listen.
+
 
 ### References
 
