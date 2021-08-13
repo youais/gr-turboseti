@@ -8,6 +8,12 @@ category: '[turboSETI]'
 #     * label
 #     * dtype
 parameters:
+- id: vlen_in
+  label: Input vector length
+  dtype: int
+- id: vlen_out
+  label: Output vector length
+  dtype: int
 - id: n_fine_chans
   label: No. of fine channels
   dtype: int
