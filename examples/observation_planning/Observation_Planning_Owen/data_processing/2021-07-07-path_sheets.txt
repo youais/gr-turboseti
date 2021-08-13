@@ -1,0 +1,38 @@
+file dir - /datax2/owen/data/2021-07-07
+scan dir - (multiple lanes) - /datax/lane1/BF/IE613/proj21/scan_59402.XXXX 
+meta data - /datax/Projects/proj21/sess_sid20210707T081819_IE613
+
+Name 	      Time      Scan No. (Irl) 
+B0329+54      08:18:00  34609 
+TIC317597583  08:22:00  3486  xxx
+TIC427730490  08:38:00  35971 xxx
+TIC367858035  08:54:00  37083 xxx
+TIC407394748  09:10:00  38194 xxx
+TIC435680451  09:26:00  39305 xxx
+TIC395393265  09:42:00  40501 xxx
+TIC396562848  09:58:00  41583 xxx
+TIC142090065  10:14:00  42667 xx
+TIC142117976  10:30:00  43751 x
+TIC445805961  10:46:00  4486  x
+
+
+
+--
+RAW Guppi - TIC142090065
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.42667/IE613_20210707_101400_spw5_sb51:462_dur900_dir1.380093,1.391686,J2000_bfs/20210707_101400_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.42667/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T10:14:00.000 -o /datax2/owen/data/2021-07-07/TIC142090065/raw/59402.42667.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC142117976
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.43751/IE613_20210707_103000_spw5_sb51:462_dur900_dir1.417909,1.391889,J2000_bfs/20210707_103000_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.43751/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T10:30:00.000 -o /datax2/owen/data/2021-07-07/TIC142117976/raw/59402.43751.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC445805961
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.4486/IE613_20210707_104600_spw5_sb51:462_dur900_dir1.645563,1.330133,J2000_bfs/20210707_104600_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.4486/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T10:46:00.000 -o /datax2/owen/data/2021-07-07/TIC445805961/raw/59402.4486.[[iter]].raw -m 4096"
+
+
+
+
+

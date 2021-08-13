@@ -1,0 +1,43 @@
+
+-- 
+RAW Guppi - B0329+54 
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.34609/IE613_20210707_081800_spw5_sb51:462_dur180_dir0.929341,0.949648,J2000_bfs/20210707_081800_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.34609/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T08:18:00.000 -o /datax2/owen/data/2021-07-07/B0329+54/raw/59402.34609.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC317597583
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.3486/IE613_20210707_082200_spw5_sb51:462_dur900_dir6.14385,1.318642,J2000_bfs/20210707_082200_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.3486/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T08:22:00.000 -o /datax2/owen/data/2021-07-07/TIC317597583/raw/59402.3486.[[iter]].raw -m 4096"
+
+
+--
+RAW Guppi - TIC427730490
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.35971/IE613_20210707_083800_spw5_sb51:462_dur900_dir6.148354,1.248023,J2000_bfs/20210707_083800_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.35971/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T08:38:00.000 -o /datax2/owen/data/2021-07-07/TIC427730490/raw/59402.35971.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC367858035
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.37083/IE613_20210707_085400_spw5_sb51:462_dur900_dir6.191409,1.320956,J2000_bfs/20210707_085400_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.37083/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T08:54:00.000 -o /datax2/owen/data/2021-07-07/TIC367858035/raw/59402.37083.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC407394748
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.38194/IE613_20210707_091000_spw5_sb51:462_dur900_dir0.094608,1.359264,J2000_bfs/20210707_091000_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.38194/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T09:10:00.000 -o /datax2/owen/data/2021-07-07/TIC407394748/raw/59402.38194.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC435680451
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.39305/IE613_20210707_092600_spw5_sb51:462_dur900_dir0.312676,1.381698,J2000_bfs/20210707_092600_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.39305/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T09:26:00.000 -o /datax2/owen/data/2021-07-07/TIC435680451/raw/59402.39305.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC395393265
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.40501/IE613_20210707_094200_spw5_sb51:462_dur900_dir0.459702,1.357694,J2000_bfs/20210707_094200_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.40501/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T09:42:00.000 -o /datax2/owen/data/2021-07-07/TIC395393265/raw/59402.40501.[[iter]].raw -m 4096"
+
+--
+RAW Guppi - TIC396562848
+
+singularity exec --bind /datax,/datax2 /datax2/obs/singularity/lofar-upm_latest-2021-07-01-81562ec09d81.simg bash -l -c "lofar_udp_extractor -p 30 -M GUPPI -I /datax/Projects/proj21/sess_sid20210707T081819_IE613/scan_59402.41583/IE613_20210707_095800_spw5_sb51:462_dur900_dir0.773859,1.336074,J2000_bfs/20210707_095800_bfs.h -S 1 -b 0,411 -i /datax/lane[[port]]/BF/IE613/proj21/scan_59402.41583/udp_IE613_1613[[port]].blc00.bl.pvt.2021-07-07T09:58:00.000 -o /datax2/owen/data/2021-07-07/TIC396562848/raw/59402.41583.[[iter]].raw -m 4096"
+
+
