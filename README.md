@@ -9,7 +9,7 @@ The module currently consists of 3 blocks:
 
 The `DopplerFinder Sink` block seeks to combine the functions of both `DopplerFinder Buffer` and `DopplerFinder`. For a good example of the intended output of `DopplerFinder Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py). 
 
-This code has been tested on Linux.
+This code has been tested on a Linux installation of GNU Radio version 3.8.
 
 
 ### Dependencies
