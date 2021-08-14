@@ -71,7 +71,7 @@ Working:
 
 Issues:
 - `DopplerFinder Buffer` block -- refer to script for more details
-- `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`. It is possible that this issue may be fatal.
+- `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`.
 
 ### Next Steps
 
