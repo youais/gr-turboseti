@@ -46,7 +46,7 @@ class find_et_sync(gr.sync_block):
                  flagging, obs_info, append_output, blank_dc,
                  kernels, gpu_backend, precision, gpu_id):
 
-        turboseti_params = {} #['filename', 'source_name', 'src_raj', 'src_dej',
+        self.turboseti_params = {} #['filename', 'source_name', 'src_raj', 'src_dej',
                                 #'tstart', 'tsamp', 'f_start', 'f_stop',
                                 #'n_fine_chans', 'n_ints_in_file', 'log_level_int',
                                 #'coarse_chan', 'n_coarse_chan', 'min_drift',
@@ -90,7 +90,7 @@ class find_et_sync(gr.sync_block):
         self.turboseti_params['precision'] = precision
         self.turboseti_params['gpu_id'] = gpu_id
 
-        print("filled dictionary:", turboseti_params)
+        print("filled dictionary:", self.turboseti_params)
 
         # Create empty matrix with correct shape
         self.spectra = np.empty((0, self.turboseti_params['n_fine_chans']), dtype=np.float32, order='C')
