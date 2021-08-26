@@ -160,7 +160,7 @@ class find_et_buffer(gr.interp_block):
                 print("output_items[0]:", output_items[0])
                 break
         return len(output_items[0])
-"""
+
         #print(input_items[0])
         #i = 0
         #for item in input_items[0]:
@@ -170,7 +170,7 @@ class find_et_buffer(gr.interp_block):
         #    else:
         #        print(i=10)
         #output_items[0][:] = input_items[0]
-        """
+
         while True:
             i = 0
             j = 0
