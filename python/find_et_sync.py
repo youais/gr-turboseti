@@ -40,64 +40,77 @@ class find_et_sync(gr.sync_block):
 
     """
 
-    def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
-                    flagging, obs_info, append_output, blank_dc,
-                    kernels, gpu_backend, precision, gpu_id):
+    def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp,
+                 f_start, f_stop, n_fine_chans, n_ints_in_file, log_level_int,
+                 coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
+                 flagging, obs_info, append_output, blank_dc,
+                 kernels, gpu_backend, precision, gpu_id):
 
-        self.filename = filename
-        self.source_name = source_name
-        self.src_raj = src_raj
-        self.src_dej = src_dej
-        self.tstart = tstart
-        self.tsamp = tsamp
-        self.f_start = f_start
-        self.f_stop = f_stop
-        self.n_fine_chans = n_fine_chans
-        self.n_ints_in_file = n_ints_in_file
+        turboseti_params = {} #['filename', 'source_name', 'src_raj', 'src_dej',
+                                #'tstart', 'tsamp', 'f_start', 'f_stop',
+                                #'n_fine_chans', 'n_ints_in_file', 'log_level_int',
+                                #'coarse_chan', 'n_coarse_chan', 'min_drift',
+                                #'max_drift', 'snr', 'out_dir', 'flagging', 'obs_info',
+                                #'append_output', 'blank_dc', 'kernels', 'gpu_backend',
+                                #'precision', 'gpu_id']
+        print("Empty dict created!")
+
+        turboseti_params['filename'] = filename
+        turboseti_params['source_name'] = source_name
+        turboseti_params['src_raj'] = src_raj
+        turboseti_params['src_dej'] = src_dej
+        turboseti_params['tstart'] = tstart
+        turboseti_params['tsamp'] = tsamp
+        turboseti_params['f_start'] = f_start
+        turboseti_params['f_stop'] = f_stop
+        turboseti_params['n_fine_chans'] = n_fine_chans
+        turboseti_params['n_ints_in_file'] = n_ints_in_file
 
         if log_level_int == 0:
-            self.log_level_int = logging.DEBUG
+            turboseti_params['log_level_int'] = logging.DEBUG
         elif log_level_int == 1:
-            self.log_level_int = logging.INFO
+            turboseti_params['log_level_int'] = logging.INFO
         elif log_level_int == 2:
-            self.log_level_int = logging.WARN
+            turboseti_params['log_level_int'] = logging.WARN
         else:
             raise RuntimeError("Incorrect logging level (%i)"%log_level_int)
 
-        self.coarse_chan = coarse_chan
-        self.n_coarse_chan = n_coarse_chan
-        self.min_drift = min_drift
-        self.max_drift = max_drift
-        self.snr = snr
-        self.out_dir = out_dir
-        self.flagging = flagging
-        self.obs_info = obs_info
-        self.append_output = append_output
-        self.blank_dc = blank_dc
-        self.kernels = kernels
-        self.gpu_backend = gpu_backend
-        self.precision = precision
-        self.gpu_id = gpu_id
+        turboseti_params['coarse_chan'] = coarse_chan
+        turboseti_params['n_coarse_chan'] = n_coarse_chan
+        turboseti_params['min_drift'] = min_drift
+        turboseti_params['max_drift'] = max_drift
+        turboseti_params['snr'] = snr
+        turboseti_params['out_dir'] = out_dir
+        turboseti_params['flagging'] = flagging
+        turboseti_params['obs_info'] = obs_info
+        turboseti_params['append_output'] = append_output
+        turboseti_params['blank_dc'] = blank_dc
+        turboseti_params['kernels'] = kernels
+        turboseti_params['gpu_backend'] = gpu_backend
+        turboseti_params['precision'] = precision
+        turboseti_params['gpu_id'] = gpu_id
+
+        print("filled dictionary:", turboseti_params)
 
         # Create empty matrix with correct shape
-        self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+        self.spectra = np.empty((0, turboseti_params['n_fine_chans']), dtype=np.float32, order='C')
 
         self.get_context_pool = mp.get_context("spawn").Pool(processes=1)
         #self.pool = mp.Pool(processes=1)
 
         gr.sync_block.__init__(self,
             name="DopplerFinder Sink",
-            in_sig=[(np.float32, self.n_fine_chans)], #this should be vector float32, specify size = 1e6?
+            in_sig=[(np.float32, turboseti_params['n_fine_chans'])], #this should be vector float32, specify size = 1e6?
             out_sig=None)
 
     def apply_turboseti(self):
         print("Initialising Clancy...")
-        clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
-                            self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
-                            self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
-                            self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
-                            self.kernels, self.gpu_backend, self.precision, self.gpu_id)
+        clancy = DopplerFinder(turboseti_params)
+        #clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
+        #                    self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
+        #                    self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
+        #                    self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
+        #                    self.kernels, self.gpu_backend, self.precision, self.gpu_id)
         print("Clancy is looking for ET...")
         clancy.find_ET(self.spectra)
         print("Clancy is done.")
@@ -117,7 +130,7 @@ class find_et_sync(gr.sync_block):
         print(input_items[0])
         with self.get_context_pool as pool:
             while True:
-                if self.spectra.shape[0] < self.n_ints_in_file: # spectra rows < 60
+                if self.spectra.shape[0] < turboseti_params['n_ints_in_file']: # spectra rows < 60
                     if DEBUGGING:
                         print("DEBUG Buffer spectra row #:", i,"/60")
                         print("DEBUG Incoming vector #:", j)
@@ -142,7 +155,7 @@ class find_et_sync(gr.sync_block):
                     print("Starting DopplerFinder process...")
                     print(dopplerfinder_process.get())
                     print("Process done.")
-                    self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+                    self.spectra = np.empty((0, turboseti_params['n_fine_chans']), dtype=np.float32, order='C')
                     i = 0
                     if DEBUGGING:
                         print("DEBUG Reset spectra shape:", self.spectra.shape[0])
@@ -152,5 +165,5 @@ class find_et_sync(gr.sync_block):
         print("Pls let this work. If this prints, then it's working (probs??)")
         return len(input_items[0])
 
-if __name__ == "__main__":
-    find_et_sync().run()
+#if __name__ == "__main__": # Needed when running code directly, but not needed in GNU Radio block
+#    find_et_sync().run()
