@@ -66,7 +66,7 @@ class find_et_buffer(gr.basic_block):
         #return len(output_items[0])
         self.spectra = np.append(self.spectra, input_items[0], axis=0)
 
-        if self.spectra.shape[0]
+        #if self.spectra.shape[0]
 
         while True:
             if self.spectra.shape[0] < self.n_ints_in_file:

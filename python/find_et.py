@@ -88,7 +88,7 @@ class find_et(gr.sync_block):
     def work(self, input_items, output_items):
 
         if DEBUGGING:
-            print("input_items[0] shape:", input_items[0].shape") # Checks input is expected shape (60, 1e6)
+            print("input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
 
         #spectra = np.squeeze(input_items[0]) --> use with basic_block
         spectra = input_items[0] # Use with interp_block
