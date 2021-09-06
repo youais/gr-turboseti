@@ -72,12 +72,16 @@ class find_et_buffer(gr.basic_block):
         while True:
             if self.spectra.shape[0] < self.n_ints_in_file:
                 print("Initial self.spectra.shape:", self.spectra.shape)
+                print("input_items[0] shape:", input_items[0].shape)
+                print("input_items[0]:", input_items[0])
                 self.spectra = np.append(self.spectra, input_items[0], axis=0)
                 print("New self.spectra.shape:", self.spectra.shape)
             else:
                 print("Full self.spectra.shape:", self.spectra.shape)
                 output_items[0][:] = self.spectra
+                print("output_items[0] shape:", output_items[0].shape)
                 print("output_items[0]:", output_items[0])
+                print(len(output_items[0]))
                 break
                 #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
                 return len(output_items[0])
