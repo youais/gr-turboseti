@@ -64,17 +64,18 @@ class find_et_buffer(gr.basic_block):
         #output_items[0][:] = input_items[0]
         #consume(0, len(input_items[0]))        #self.consume_each(len(input_items[0]))
         #return len(output_items[0])
-        self.spectra = np.append(self.spectra, input_items[0], axis=0)
+
+        #self.spectra = np.append(self.spectra, input_items[0], axis=0)
 
         #if self.spectra.shape[0]
 
         while True:
             if self.spectra.shape[0] < self.n_ints_in_file:
-                print("Initial self.spectra.shape[0]:", self.spectra.shape[0])
+                print("Initial self.spectra.shape:", self.spectra.shape)
                 self.spectra = np.append(self.spectra, input_items[0], axis=0)
-                print("New self.spectra.shape[0]:", self.spectra.shape[0])
+                print("New self.spectra.shape:", self.spectra.shape)
             else:
-                print("Full self.spectra.shape[0]:", self.spectra.shape[0])
+                print("Full self.spectra.shape:", self.spectra.shape)
                 output_items[0][:] = self.spectra
                 print("output_items[0]:", output_items[0])
                 break
