@@ -48,7 +48,7 @@ class find_et_buffer(gr.basic_block):
         self.n_ints_in_file = n_ints_in_file
 
         self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-        self.input_items = input_items[0]
+        #self.input_items = input_items[0]
 
         gr.basic_block.__init__(self,
             name="find_et_buffer",
@@ -79,7 +79,7 @@ class find_et_buffer(gr.basic_block):
                 print("output_items[0]:", output_items[0])
                 break
                 #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-        return len(output_items[0])
+                return len(output_items[0])
 
 """
 ALTERNATIVE VERSION: INTERPOLATION BLOCK

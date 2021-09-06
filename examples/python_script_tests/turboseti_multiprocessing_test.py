@@ -13,7 +13,7 @@ Issues:
 import multiprocessing as mp
 import numpy as np
 import logging
-from main import DopplerFinder
+from turboseti_stream import DopplerFinder
 
 def apply_turboseti(spectra, filename, source_name, src_raj, src_dej,
                     tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,

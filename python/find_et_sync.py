@@ -118,7 +118,7 @@ class find_et_sync(gr.sync_block):
     #def multiprocessing_buffer(self, input_items):
     def __getstate__(self):
         self_dict = self.__dict__.copy()
-        del self_dict['pool']
+        del self_dict['get_context_pool']
         return self_dict
 
     def __setstate__(self, state):
