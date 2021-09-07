@@ -76,6 +76,7 @@ class find_et_buffer(gr.basic_block):
                 print("input_items[0]:", input_items[0])
                 self.spectra = np.append(self.spectra, input_items[0], axis=0)
                 print("New self.spectra.shape:", self.spectra.shape)
+                consume(0, len(input_items[0]))
             else:
                 print("Full self.spectra.shape:", self.spectra.shape)
                 output_items[0][:] = self.spectra
