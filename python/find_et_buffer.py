@@ -45,12 +45,16 @@ class find_et_buffer(gr.basic_block):
         self.n_fine_chans = n_fine_chans
         self.n_ints_in_file = n_ints_in_file
 
+        self.set_output_multiple(self.n_ints_in_file)
+
         self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
 
         gr.basic_block.__init__(self,
             name="find_et_buffer",
             in_sig=[(np.float32, self.n_fine_chans)],
-            out_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))])
+            out_sig=[(np.float32, self.n_fine_chans)])
+            #out_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))],
+            #self.set_output_multiple(self.n_ints_in_file))
 
     #def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
@@ -66,7 +70,7 @@ class find_et_buffer(gr.basic_block):
                 print("input_items[0]:", input_items[0])
                 self.spectra = np.append(self.spectra, input_items[0], axis=0)
                 print("New self.spectra.shape:", self.spectra.shape)
-                consume(0, len(input_items[0]))
+                self.consume(0, len(input_items[0]))
             else:
                 print("Full self.spectra.shape:", self.spectra.shape)
                 output_items[0][:] = self.spectra

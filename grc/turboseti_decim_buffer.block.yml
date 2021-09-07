@@ -1,0 +1,42 @@
+id: turboseti_decim_buffer
+label: decim_buffer
+category: '[turboSETI]'
+
+#  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
+#     Sub-entries of dictionary:
+#     * id (makes the value accessible as \$keyname, e.g. in the make entry)
+#     * label
+#     * dtype
+- id: n_fine_chans
+  label: No. of fine channels
+  dtype: int
+- id: n_ints_in_file
+  label: No. of integrations in file
+  dtype: int
+
+#  Make one 'inputs' list entry per input. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * domain
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs)
+inputs:
+- label: in
+
+#  Make one 'outputs' list entry per output. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs)
+outputs:
+- label: out
+  #domain: ...
+  #dtype: float #!-- e.g. int, float, complex, byte, short, xxx_vector, ...--
+  #vlen: ${vlen_out}
+
+templates:
+  imports: import turboseti
+  make: turboseti.decim_buffer(${n_fine_chans}, ${n_ints_in_file})
+
+
+file_format: 1

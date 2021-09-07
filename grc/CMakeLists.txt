@@ -17,9 +17,9 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
     turboseti_find_et.block.yml
     turboseti_find_et_sync.block.yml
-    turboseti_find_et_buffer.block.yml DESTINATION share/gnuradio/grc/blocks
+    turboseti_find_et_buffer.block.yml
+    turboseti_decim_buffer.block.yml DESTINATION share/gnuradio/grc/blocks
 )

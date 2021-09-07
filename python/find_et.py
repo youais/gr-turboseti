@@ -81,7 +81,8 @@ class find_et(gr.sync_block):
 
         gr.sync_block.__init__(self,
             name="DopplerFinder",
-            in_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))], #this should be vector float32, specify size = 1e6?
+            in_sig=[(np.float32, self.n_fine_chans)],
+            # in_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))], #this should be vector float32, specify size = 1e6?
             out_sig=None)
 
 
@@ -90,8 +91,8 @@ class find_et(gr.sync_block):
         if DEBUGGING:
             print("input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
 
-        spectra = np.squeeze(input_items[0]) # Use with basic_block
-        #spectra = input_items[0] # Use with interp_block
+        #spectra = np.squeeze(input_items[0]) # Use with basic_block
+        spectra = input_items[0] # Use with interp_block
         if DEBUGGING:
             print("DEBUG Current spectra:", spectra)
             print("DEBUG Current spectra shape:", spectra.shape)

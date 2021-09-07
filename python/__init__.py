@@ -35,4 +35,6 @@ except ImportError:
 from .find_et import find_et
 from .find_et_sync import find_et_sync
 from .find_et_buffer import find_et_buffer
+from .decim_buffer import decim_buffer
+
 #
