@@ -42,9 +42,12 @@ class decim_buffer(gr.decim_block):
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
+        print("in.shape:", in0.shape)
         print("in:", in0)
         out = output_items[0]
+        print("output items shape:", out.shape)
+        print("output items:", out)
         # <+signal processing here+>
         out[:] = in0
-        print("out:", out)
+        print("output items check:", out)
         return len(output_items[0])
