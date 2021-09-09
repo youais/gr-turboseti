@@ -38,7 +38,7 @@ class decim_buffer(gr.decim_block):
             in_sig=[(np.float32, self.n_fine_chans)],
             out_sig=[(np.float32, self.n_fine_chans)],
             decim=self.n_ints_in_file)
-        self.set_relative_rate(1.0/self.n_ints_in_file)
+        self.set_relative_rate(self.n_ints_in_file/self.n_ints_in_file)
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
