@@ -45,27 +45,26 @@ class find_et_buffer(gr.basic_block):
         self.n_fine_chans = n_fine_chans
         self.n_ints_in_file = n_ints_in_file
 
-        #self.set_output_multiple(self.n_ints_in_file)
-
-        self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-
         gr.basic_block.__init__(self,
             name="find_et_buffer",
             in_sig=[(np.float32, self.n_fine_chans)],
             out_sig=[(np.float32, self.n_fine_chans)])
-            #out_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))],
-            #self.set_output_multiple(self.n_ints_in_file))
+            #out_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))])
 
-    def forecast(self, noutput_items, ninput_items_required):
+        self.set_output_multiple(self.n_ints_in_file)
+        self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
+
+    #def forecast(self, noutput_items, ninput_items_required):
         #setup size of input_items[i] for work call
         #for i in range(len(ninput_items_required)):
-        ninput_items_required = self.n_ints_in_file
-        print("ninput_items_required:", ninput_items_required)
+    #    ninput_items_required = self.n_ints_in_file
+    #    print("ninput_items_required:", ninput_items_required)
 
-        noutput_items = self.n_ints_in_file
-        print("noutput_items:", noutput_items)
+    #    noutput_items = self.n_ints_in_file
+    #    print("noutput_items:", noutput_items)
 
     def general_work(self, input_items, output_items):
+
 
         block_input = input_items[0]
         print("input size:", block_input.size)
@@ -83,15 +82,15 @@ class find_et_buffer(gr.basic_block):
 
         return len(block_output)
 
-
-        """while True:
+"""
+        while True:
             if self.spectra.shape[0] < self.n_ints_in_file:
                 print("Initial self.spectra.shape:", self.spectra.shape)
                 print("input_items[0] shape:", input_items[0].shape)
                 print("input_items[0]:", input_items[0])
                 self.spectra = np.append(self.spectra, input_items[0], axis=0)
                 print("New self.spectra.shape:", self.spectra.shape)
-                self.consume(0, len(input_items[0]))
+                #self.consume(0, len(input_items[0]))
             else:
                 print("Full self.spectra.shape:", self.spectra.shape)
                 output_items[0][:] = self.spectra
@@ -100,4 +99,5 @@ class find_et_buffer(gr.basic_block):
                 print(len(output_items[0]))
                 break
                 #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-                return len(output_items[0])"""
+                return len(output_items[0])
+"""
