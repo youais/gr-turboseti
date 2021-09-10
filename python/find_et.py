@@ -21,10 +21,10 @@
 
 import logging #make sure this is here
 import numpy as np
+import datetime as dt
 
 from gnuradio import gr
 from turboseti_stream.turboseti_stream import DopplerFinder
-from datetime import datetime
 
 DEBUGGING = True
 
@@ -33,6 +33,8 @@ class find_et(gr.sync_block):
     """
     This is the script for the DopplerFinder block, which runs an adapted version of
     turboSETI (turboseti_stream) on a numpy float32 data matrix stored in RAM.
+
+    Part of the ATA GNU Radio pipeline. See examples folder for use in flowgraph.
 
     Issues:
     - Currently overwrites initial .dat/.log file with each iteration
@@ -95,19 +97,19 @@ class find_et(gr.sync_block):
         if DEBUGGING:
             print("DEBUG input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
 
-        #spectra = np.squeeze(input_items[0]) # Use with basic_block
-        spectra = input_items[0] # Use with interp_block
+        spectra = input_items[0]
         if DEBUGGING:
             print("DEBUG Current spectra shape:", spectra.shape)
             print("DEBUG Current spectra:", spectra)
 
         print("Initialising Clancy...")
 
-        current_datetime = datetime.now() # Local time - change to UTC?
+        local_date = str(dt.date.today()) # Local time - change to UTC?
+        local_time = str(dt.datetime.now().time())
 
-        filename = self.source_name + str(current_datetime)
+        filename = self.source_name + "_" + local_date + "_" + local_time
         if DEBUGGING:
-            print(filename)
+            print("DEBUG Filename:", filename)
 
         clancy = DopplerFinder(filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
@@ -126,7 +128,7 @@ class find_et(gr.sync_block):
     analyse data stored in RAM, rather than a .fil/.h5 file. Outputs .dat and .log
     file into user-specified out_dir.
 
-    Part of the ATA GNU Radio pipeline. See examples folder for use in flowgraph.
+
 
     Yolo'd source code @ https://github.com/youais/turboseti-stream/blob/patch-1/main.py
 
@@ -185,22 +187,9 @@ class find_et(gr.sync_block):
 
     def general_work(self, input_items, output_items):
 
-        #print("Initialising Clancy...")
-        spectra = input_items[0] #[:len(output_items[0])]
-
-        clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
-                            self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
-                            self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
-                            self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
-                            self.kernels, self.gpu_backend, self.precision, self.gpu_id)
-
-        #print("Clancy searching for ET...")
-        clancy.find_ET(spectra)
-
         self.consume(len(self.input_buffer_len))
 
         return len(spectra)
-        #print("Clancy searched! Clancy excellent! Check results?")
 
 #    def general_work(self, input_items, output_items):
 #        output_items[0][:] = input_items[0]
