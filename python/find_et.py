@@ -31,10 +31,14 @@ class find_et(gr.sync_block):
 
     """
     This is the script for the DopplerFinder block, which runs an adapted version of
-    turboSETI on a numpy float32 data matrix stored in RAM.
+    turboSETI (turboseti_stream) on a numpy float32 data matrix stored in RAM.
+
+    Issues:
+    - Currently overwrites initial .dat/.log file with each iteration
+        - Want to create a system of using a new filename each time...
 
     Yiwei Chai
-    Last updated August 13, 2021
+    Last updated September 10, 2021
 
     """
 
@@ -82,20 +86,19 @@ class find_et(gr.sync_block):
         gr.sync_block.__init__(self,
             name="DopplerFinder",
             in_sig=[(np.float32, self.n_fine_chans)],
-            # in_sig=[(np.float32, (self.n_ints_in_file, self.n_fine_chans))], #this should be vector float32, specify size = 1e6?
             out_sig=None)
 
 
     def work(self, input_items, output_items):
 
         if DEBUGGING:
-            print("input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
+            print("DEBUG input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
 
         #spectra = np.squeeze(input_items[0]) # Use with basic_block
         spectra = input_items[0] # Use with interp_block
         if DEBUGGING:
-            print("DEBUG Current spectra:", spectra)
             print("DEBUG Current spectra shape:", spectra.shape)
+            print("DEBUG Current spectra:", spectra)
 
         print("Initialising Clancy...")
         clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
