@@ -100,6 +100,6 @@ Theory:
 GNU Radio:
 - [GNU Radio OOT Modules](https://wiki.gnuradio.org/index.php/OutOfTreeModules)
 - [Types of GNU Radio Blocks](https://wiki.gnuradio.org/index.php/Types_of_Blocks)
-- [Guided GNU Radio Tutorial for Python Blocks (depreciated for v3.8, but still helpful](https://wiki.gnuradio.org/index.php/Guided_Tutorial_GNU_Radio_in_Python)
+- [Guided GNU Radio Tutorial for Python Blocks (depreciated for v3.8, but still helpful)](https://wiki.gnuradio.org/index.php/Guided_Tutorial_GNU_Radio_in_Python)
 - [Using GNU Radio at the ATA](https://wiki.gnuradio.org/index.php/GNURadio@theATA)
 
