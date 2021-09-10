@@ -57,11 +57,11 @@ Currently, the existing data-processing pipeline for the ATA uses custom hardwar
 The GNU Radio SETI pipeline is outlined as follows:
 1. Radio telescope data from the ATA streams in through a USRP source
 2. The data is 'channelised' through a polyphase filterbank, followed by a Fast Fourier Transform (FFT). This creates a high-spectral resolution product on the order of ~1MHz
-3. This product accumulates in DopplerFinder Sink's internal buffer for ~60s, to create a data matrix of shape (60, 1e6)
-4. An adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) analyses this data matrix for potential technosignatures
+3. This product accumulates in DopplerFinder Buffer for ~60s, to create a data matrix of shape (60, 1e6)
+4. The data matrix is then passed to DopplerFinder, which uses an adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) to analyses it for potential technosignatures
 
 Example flowgraph (refer to examples folder for .grc file):
-<img width="1280" alt="usrp_test_flowgraph" src="https://user-images.githubusercontent.com/54188486/129296704-577b0380-6899-47f4-8a7c-d9cf56200835.png">
+![flowgraph](https://user-images.githubusercontent.com/54188486/132890991-4e16bc41-c3ff-425e-a8e3-f010319d4c48.jpg)
 
 
 ### Outcome (as of September 10, 2021)
@@ -75,11 +75,10 @@ Issues:
 
 ### Next Steps
 
-1. Deal with Doppler Finder block file name issue
-2. _Optional: Automate plotting of dynamic spectra of hits_
-3. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
-4. Turn `gr-turboseti` into PyPi package
-5. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
+1. _Optional: Automate plotting of dynamic spectra of hits_
+2. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
+3. Turn `gr-turboseti` into PyPi package
+4. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
 
 I plan to continue working on this project into the academic year.
 
