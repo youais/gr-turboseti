@@ -64,22 +64,22 @@ Example flowgraph (refer to examples folder for .grc file):
 <img width="1280" alt="usrp_test_flowgraph" src="https://user-images.githubusercontent.com/54188486/129296704-577b0380-6899-47f4-8a7c-d9cf56200835.png">
 
 
-### Outcome (as of August 13, 2021)
+### Outcome (as of September 10, 2021)
 
 Working:
 - `DopplerFinder` block
+- `DopplerFinder Buffer` block
 
 Issues:
-- `DopplerFinder Buffer` block -- refer to script for more details
 - `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`.
 
 ### Next Steps
 
-1. Fully integrate DopplerFinder Sink OR DopplerFinder Buffer block into GNU Radio
-3. _Optional: Automate plotting of dynamic spectra of hits_
-4. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
-5. Turn `gr-turboseti` into PyPi package
-6. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
+1. Deal with Doppler Finder block file name issue
+2. _Optional: Automate plotting of dynamic spectra of hits_
+3. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
+4. Turn `gr-turboseti` into PyPi package
+5. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
 
 I plan to continue working on this project into the academic year.
 
