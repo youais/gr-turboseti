@@ -21,9 +21,10 @@
 
 import logging #make sure this is here
 import numpy as np
-import multiprocessing as mp
+
 from gnuradio import gr
 from turboseti_stream.turboseti_stream import DopplerFinder
+from datetime import datetime
 
 DEBUGGING = True
 
@@ -42,13 +43,13 @@ class find_et(gr.sync_block):
 
     """
 
-    def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
+    def __init__(self, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
                     flagging, obs_info, append_output, blank_dc,
-                    kernels, gpu_backend, precision, gpu_id):
+                    kernels, gpu_backend, precision, gpu_id): # removed filename parameter
 
         # Define parameters which need to be passed into DopplerFinder class
-        self.filename = filename
+        # self.filename = filename
         self.source_name = source_name
         self.src_raj = src_raj
         self.src_dej = src_dej
@@ -101,7 +102,14 @@ class find_et(gr.sync_block):
             print("DEBUG Current spectra:", spectra)
 
         print("Initialising Clancy...")
-        clancy = DopplerFinder(self.filename, self.source_name, self.src_raj, self.src_dej,
+
+        current_datetime = datetime.now() # Local time - change to UTC?
+
+        filename = self.source_name + str(current_datetime)
+        if DEBUGGING:
+            print(filename)
+
+        clancy = DopplerFinder(filename, self.source_name, self.src_raj, self.src_dej,
                             self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
                             self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
                             self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
