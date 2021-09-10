@@ -36,9 +36,9 @@ class find_et(gr.sync_block):
 
     Part of the ATA GNU Radio pipeline. See examples folder for use in flowgraph.
 
-    Issues:
-    - Currently overwrites initial .dat/.log file with each iteration
-        - Want to create a system of using a new filename each time...
+    Future Work:
+    - Neat notification of hits? Currently need to check manually...
+    - Automate plotting of hits?
 
     Yiwei Chai
     Last updated September 10, 2021
@@ -121,79 +121,3 @@ class find_et(gr.sync_block):
         print("Clancy is done.")
 
         return len(spectra)
-
-    """
-
-    GNU Radio block that runs yolo'd version of turboSETI that can directly
-    analyse data stored in RAM, rather than a .fil/.h5 file. Outputs .dat and .log
-    file into user-specified out_dir.
-
-
-
-    Yolo'd source code @ https://github.com/youais/turboseti-stream/blob/patch-1/main.py
-
-
-
-    def __init__(self, filename, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                        log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
-                        flagging, obs_info, append_output, blank_dc,
-                        kernels, gpu_backend, precision, gpu_id, input_buffer_len):
-
-        gr.basic_block.__init__(self,
-                                name="Doppler Finder",
-                                in_sig=[np.float32],
-                                out_sig=None)
-
-        self.filename = filename
-        self.source_name = source_name
-        self.src_raj = src_raj
-        self.src_dej = src_dej
-        self.tstart = tstart
-        self.tsamp = tsamp
-        self.f_start = f_start
-        self.f_stop = f_stop
-        self.n_fine_chans = n_fine_chans
-        self.n_ints_in_file = n_ints_in_file
-
-        if log_level_int == 0:
-            self.log_level_int = logging.DEBUG
-        elif log_level_int == 1:
-            self.log_level_int = logging.INFO
-        elif log_level_int == 2:
-            self.log_level_int = logging.WARN
-        else:
-            raise RuntimeError("Incorrect logging level (%i)"%log_level_int)
-
-        self.coarse_chan = coarse_chan
-        self.n_coarse_chan = n_coarse_chan
-        self.min_drift = min_drift
-        self.max_drift = max_drift
-        self.snr = snr
-        self.out_dir = out_dir
-        self.flagging = flagging
-        self.obs_info = obs_info
-        self.append_output = append_output
-        self.blank_dc = blank_dc
-        self.kernels = kernels
-        self.gpu_backend = gpu_backend
-        self.precision = precision
-        self.gpu_id = gpu_id
-
-        self.input_buffer_len = input_buffer_len
-
-    def forecast(self, noutput_items, ninput_items_required):
-        #setup size of input_items[i] for work call
-        ninput_items_required[0] = self.input_buffer_len
-
-    def general_work(self, input_items, output_items):
-
-        self.consume(len(self.input_buffer_len))
-
-        return len(spectra)
-
-#    def general_work(self, input_items, output_items):
-#        output_items[0][:] = input_items[0]
-#        consume(0, len(input_items[0]))        #self.consume_each(len(input_items[0]))
-#        return len(output_items[0])
-
-    """

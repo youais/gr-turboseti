@@ -63,41 +63,19 @@ class find_et_buffer(gr.basic_block):
 
         block_input = input_items[0]
         if DEBUGGING:
-            print("DEBUG Input data size:", block_input.size)
+            print("DEBUG Input data shape:", block_input.shape)
             print("DEBUG Input data:", block_input)
 
         block_output = output_items[0]
         if DEBUGGING:
-            print("DEBUG Output data size:", block_output.size)
+            print("DEBUG Output data shape:", block_output.shape)
             print("DEBUG Output data:", block_output)
 
         block_output[:] = block_input
         if DEBUGGING:
-            print("DEBUG New output data size:", block_output.size)
+            print("DEBUG New output data shape:", block_output.shape)
             print("DEBUG New output data:", block_output)
 
         self.consume(0, len(block_input))
 
         return len(block_output)
-
-"""
-        # Intial code, doesn't work?
-
-        while True:
-            if self.spectra.shape[0] < self.n_ints_in_file:
-                print("Initial self.spectra.shape:", self.spectra.shape)
-                print("input_items[0] shape:", input_items[0].shape)
-                print("input_items[0]:", input_items[0])
-                self.spectra = np.append(self.spectra, input_items[0], axis=0)
-                print("New self.spectra.shape:", self.spectra.shape)
-                #self.consume(0, len(input_items[0]))
-            else:
-                print("Full self.spectra.shape:", self.spectra.shape)
-                output_items[0][:] = self.spectra
-                print("output_items[0] shape:", output_items[0].shape)
-                print("output_items[0]:", output_items[0])
-                print(len(output_items[0]))
-                break
-                #self.spectra = np.empty((0, self.n_fine_chans), dtype=np.float32, order='C')
-                return len(output_items[0])
-"""

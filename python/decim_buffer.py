@@ -24,8 +24,10 @@ import numpy as np
 from gnuradio import gr
 
 class decim_buffer(gr.decim_block):
+
     """
-    docstring for block decim_buffer
+    Not needed, to delete.
+    
     """
 
     def __init__(self, n_fine_chans, n_ints_in_file):
