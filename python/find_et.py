@@ -47,9 +47,10 @@ class find_et(gr.sync_block):
     """
 
     def __init__(self, source_name, src_raj, src_dej, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir)
+                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir):
                     # flagging, obs_info, append_output, blank_dc,
-                    # kernels, gpu_backend, precision, gpu_id): # removed filename, tstart parameter
+                    # kernels, gpu_backend, precision, gpu_id): 
+                    # Removed filename, tstart parameters
 
         # Define parameters which need to be passed into DopplerFinder class
         # self.filename = filename
