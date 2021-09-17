@@ -22,6 +22,7 @@
 import logging #make sure this is here
 import numpy as np
 import datetime as dt
+import time
 
 from gnuradio import gr
 from turboseti_stream.turboseti_stream import DopplerFinder
@@ -45,17 +46,17 @@ class find_et(gr.sync_block):
 
     """
 
-    def __init__(self, source_name, src_raj, src_dej, tstart, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
+    def __init__(self, source_name, src_raj, src_dej, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
                     log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
                     flagging, obs_info, append_output, blank_dc,
-                    kernels, gpu_backend, precision, gpu_id): # removed filename parameter
+                    kernels, gpu_backend, precision, gpu_id): # removed filename, tstart parameter
 
         # Define parameters which need to be passed into DopplerFinder class
         # self.filename = filename
         self.source_name = source_name
         self.src_raj = src_raj
         self.src_dej = src_dej
-        self.tstart = tstart
+        #self.tstart = tstart
         self.tsamp = tsamp
         self.f_start = f_start
         self.f_stop = f_stop
@@ -95,7 +96,7 @@ class find_et(gr.sync_block):
     def work(self, input_items, output_items):
 
         if DEBUGGING:
-            print("DEBUG input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
+            print("DEBUG DopplerFinder input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
 
         spectra = input_items[0]
         if DEBUGGING:
@@ -104,15 +105,15 @@ class find_et(gr.sync_block):
 
         print("Initialising Clancy...")
 
-        local_date = str(dt.date.today()) # Local time - change to UTC?
-        local_time = str(dt.datetime.now().time())
+        tstart_utc = time.time()
+        #tstart_local = str(dt.date.today()) + "_" + str(dt.datetime.now().time())
 
-        filename = self.source_name + "_" + local_date + "_" + local_time
+        filename = self.source_name + "_" + tstart_utc
         if DEBUGGING:
             print("DEBUG Filename:", filename)
 
         clancy = DopplerFinder(filename, self.source_name, self.src_raj, self.src_dej,
-                            self.tstart, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
+                            tstart_utc, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans, self.n_ints_in_file,
                             self.log_level_int, self.coarse_chan, self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
                             self.out_dir, self.flagging, self.obs_info, self.append_output, self.blank_dc,
                             self.kernels, self.gpu_backend, self.precision, self.gpu_id)

@@ -27,9 +27,9 @@ parameters:
   label: Dec (decimal deg)
   dtype: float
   category: Source
-- id: tstart
-  label: Observation start time
-  dtype: float
+#- id: tstart
+#  label: Observation start time
+#  dtype: float
 - id: tsamp
   label: Time step (s)
   dtype: float
@@ -147,11 +147,11 @@ inputs:
 templates:
   imports: import turboseti
   make: turboseti.find_et(${source_name}, ${src_raj}, ${src_dej},
-                        ${tstart}, ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
+                        ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
                         ${n_ints_in_file}, ${log_level_int}, ${coarse_chan}, ${n_coarse_chan},
                         ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
                         ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
                         ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
-                        # removed ${filename} parameter
+                        # removed ${filename}, ${tstart} parameter
 
 file_format: 1
