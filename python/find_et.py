@@ -38,7 +38,6 @@ class find_et(gr.sync_block):
     Part of the ATA GNU Radio pipeline. See examples folder for use in flowgraph.
 
     Future Work:
-    - Neat notification of hits? Currently need to check manually...
     - Automate plotting of hits?
 
     Yiwei Chai
@@ -46,14 +45,15 @@ class find_et(gr.sync_block):
 
     """
 
-    def __init__(self, source_name, src_raj, src_dej, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir):
+    def __init__(self, filename, source_name, src_raj, src_dej, tsamp, f_start, f_stop,
+                 n_fine_chans, n_ints_in_file, log_level_int, coarse_chan, n_coarse_chan,
+                 min_drift, max_drift, snr, out_dir):
                     # flagging, obs_info, append_output, blank_dc,
                     # kernels, gpu_backend, precision, gpu_id):
-                    # Removed filename, tstart parameters
+                    # Removed tstart parameter
 
         # Define parameters which need to be passed into DopplerFinder class
-        # self.filename = filename
+        self.filename = filename
         self.source_name = source_name
         self.src_raj = src_raj
         self.src_dej = src_dej
@@ -114,11 +114,11 @@ class find_et(gr.sync_block):
         #                'Mean_SEFD': 0.0, 'psrflux_Sens': 0.0,
         #                'SEFDs_val': [0.0], 'SEFDs_freq': [0.0], 'SEFDs_freq_up': [0.0]}
 
-        filename = self.source_name + "_" + str(tstart_utc)
+        filename_timestamped = self.source_name + "_" + self.filename + "_" + str(tstart_utc)
         if DEBUGGING:
-            print("DEBUG Filename:", filename)
+            print("DEBUG Filename w/ timestamp:", filename_timestamped)
 
-        clancy = DopplerFinder(filename = filename,
+        clancy = DopplerFinder(filename = filename_timestamped,
                                source_name = self.source_name,
                                src_raj = self.src_raj,
                                src_dej = self.src_dej,

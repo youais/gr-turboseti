@@ -8,9 +8,10 @@ category: '[turboSETI]'
 #     * label
 #     * dtype
 parameters:
-# - id: filename
-#   label: File name
-#   dtype: string
+- id: filename
+  label: File name
+  dtype: string
+#  default: 'CH1'
 - id: out_dir
   label: Output directory
   dtype: string
@@ -146,12 +147,12 @@ inputs:
 
 templates:
   imports: import turboseti
-  make: turboseti.find_et(${source_name}, ${src_raj}, ${src_dej},
+  make: turboseti.find_et(${filename}, ${source_name}, ${src_raj}, ${src_dej},
                         ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
                         ${n_ints_in_file}, ${log_level_int}, ${coarse_chan}, ${n_coarse_chan},
                         ${min_drift}, ${max_drift}, ${snr}, ${out_dir})
                         # ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
                         # ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
-                        # Entirely removed ${filename}, ${tstart} parameters
+                        # Entirely removed ${tstart} parameter
 
 file_format: 1
