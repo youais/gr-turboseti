@@ -73,53 +73,53 @@ parameters:
   label: SNR
   dtype: float
   default: '25.0'
-- id: flagging
-  label: Flagging
-  dtype: bool
-  default: false
-  options: [true, false]
-  option_labels: [True, False]
-- id: obs_info
-  label: Observation info
-  dtype: bool
-  default: false
-  category: Misc
-- id: append_output
-  label: Append output
-  dtype: bool
-  default: false
-  category: Misc
-  options: [true, false]
-  option_labels: [True, False]
-- id: blank_dc
-  label: Flag blank DC
-  dtype: bool
-  default: true
-  category: Misc
-  options: [true, false]
-  option_labels: [True, False]
-- id: kernels
-  label: Kernels
-  dtype: bool
-  default: false
-  category: Kernels
-- id: gpu_backend
-  label: GPU backend
-  dtype: bool
-  default: false
-  category: Kernels
-  options: [true, false]
-  option_labels: [True, False]
-- id: precision
-  label: Precision
-  dtype: int
-  default: '1'
-  category: Kernels
-- id: gpu_id
-  label: GPU ID
-  dtype: int
-  default: '0'
-  category: Kernels
+#- id: flagging
+#  label: Flagging
+#  dtype: bool
+#  default: false
+#  options: [true, false]
+#  option_labels: [True, False]
+#- id: obs_info
+#  label: Observation info
+#  dtype: bool # This cannot be a bool! Figure out how to get GNU Radio to accept None type, or other workaround
+#  default: false
+#  category: Misc
+#- id: append_output
+#  label: Append output
+#  dtype: bool
+#  default: false
+#  category: Misc
+#  options: [true, false]
+#  option_labels: [True, False]
+#- id: blank_dc
+#  label: Flag blank DC
+#  dtype: bool
+#  default: true
+#  category: Misc
+#  options: [true, false]
+#  option_labels: [True, False]
+#- id: kernels
+#  label: Kernels
+#  dtype: bool
+#  default: false
+#  category: Kernels
+#- id: gpu_backend
+#  label: GPU backend
+#  dtype: bool
+#  default: false
+#  category: Kernels
+#  options: [true, false]
+#  option_labels: [True, False]
+#- id: precision
+#  label: Precision
+#  dtype: int
+#  default: '1'
+#  category: Kernels
+#- id: gpu_id
+#  label: GPU ID
+#  dtype: int
+#  default: '0'
+#  category: Kernels
 
 
 #  Make one 'inputs' list entry per input. Sub-entries of dictionary:
@@ -149,9 +149,9 @@ templates:
   make: turboseti.find_et(${source_name}, ${src_raj}, ${src_dej},
                         ${tsamp}, ${f_start}, ${f_stop}, ${n_fine_chans},
                         ${n_ints_in_file}, ${log_level_int}, ${coarse_chan}, ${n_coarse_chan},
-                        ${min_drift}, ${max_drift}, ${snr}, ${out_dir},
-                        ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
-                        ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
-                        # removed ${filename}, ${tstart} parameter
+                        ${min_drift}, ${max_drift}, ${snr}, ${out_dir})
+                        # ${flagging}, ${obs_info}, ${append_output}, ${blank_dc},
+                        # ${kernels}, ${gpu_backend}, ${precision}, ${gpu_id})
+                        # Entirely removed ${filename}, ${tstart} parameters
 
 file_format: 1
