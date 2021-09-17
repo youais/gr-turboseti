@@ -129,7 +129,7 @@ class find_et(gr.sync_block):
                                n_fine_chans = self.n_fine_chans,
                                n_ints_in_file = self.n_ints_in_file,
                                log_level_int = self.log_level_int,
-                               coarse_chan = self.coarse_chan,
+                               coarse_chan_num = self.coarse_chan,
                                n_coarse_chan = self.n_coarse_chan,
                                min_drift = self.min_drift,
                                max_drift = self.max_drift,
