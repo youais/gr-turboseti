@@ -47,9 +47,9 @@ class find_et(gr.sync_block):
     """
 
     def __init__(self, source_name, src_raj, src_dej, tsamp, f_start, f_stop, n_fine_chans, n_ints_in_file,
-                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir,
-                    flagging, obs_info, append_output, blank_dc,
-                    kernels, gpu_backend, precision, gpu_id): # removed filename, tstart parameter
+                    log_level_int, coarse_chan, n_coarse_chan, min_drift, max_drift, snr, out_dir)
+                    # flagging, obs_info, append_output, blank_dc,
+                    # kernels, gpu_backend, precision, gpu_id): # removed filename, tstart parameter
 
         # Define parameters which need to be passed into DopplerFinder class
         # self.filename = filename
@@ -78,14 +78,14 @@ class find_et(gr.sync_block):
         self.max_drift = max_drift
         self.snr = snr
         self.out_dir = out_dir
-        #self.flagging = flagging
-        #self.obs_info = obs_info
-        #self.append_output = append_output
-        #self.blank_dc = blank_dc
-        #self.kernels = kernels
-        #self.gpu_backend = gpu_backend
-        #self.precision = precision
-        #self.gpu_id = gpu_id
+        # self.flagging = flagging
+        # self.obs_info = obs_info
+        # self.append_output = append_output
+        # self.blank_dc = blank_dc
+        # self.kernels = kernels
+        # self.gpu_backend = gpu_backend
+        # self.precision = precision
+        # self.gpu_id = gpu_id
 
         gr.sync_block.__init__(self,
             name="DopplerFinder",
@@ -106,19 +106,42 @@ class find_et(gr.sync_block):
         print("Initialising Clancy...")
 
         tstart_utc = time.time()
-        #tstart_local = str(dt.date.today()) + "_" + str(dt.datetime.now().time())
+        # tstart_local = str(dt.date.today()) + "_" + str(dt.datetime.now().time())
+
+        # obs_info = {'pulsar': 0, 'pulsar_found': 0, 'pulsar_dm': 0.0, 'pulsar_snr': 0.0,
+        #                'pulsar_stats': self.kernels.np.zeros(6), 'RFI_level': 0.0,
+        #                'Mean_SEFD': 0.0, 'psrflux_Sens': 0.0,
+        #                'SEFDs_val': [0.0], 'SEFDs_freq': [0.0], 'SEFDs_freq_up': [0.0]}
 
         filename = self.source_name + "_" + tstart_utc
         if DEBUGGING:
             print("DEBUG Filename:", filename)
 
-        clancy = DopplerFinder(filename, self.source_name, self.src_raj, self.src_dej,
-                            tstart_utc, self.tsamp, self.f_start, self.f_stop, self.n_fine_chans,
-                            self.n_ints_in_file, self.log_level_int, self.coarse_chan,
-                            self.n_coarse_chan, self.min_drift, self.max_drift, self.snr,
-                            self.out_dir)
-                            #self.flagging, self.obs_info, self.append_output, self.blank_dc,
-                            #self.kernels, self.gpu_backend, self.precision, self.gpu_id
+        clancy = DopplerFinder(filename = filename,
+                               source_name = self.source_name,
+                               src_raj = self.src_raj,
+                               src_dej = self.src_dej,
+                               tstart = tstart_utc,
+                               tsamp = self.tsamp,
+                               f_start = self.f_start,
+                               f_stop = self.f_stop,
+                               n_fine_chans = elf.n_fine_chans,
+                               n_ints_in_file = self.n_ints_in_file,
+                               log_level_int = self.log_level_int,
+                               coarse_chan = self.coarse_chan,
+                               n_coarse_chan = self.n_coarse_chan,
+                               min_drift = self.min_drift,
+                               max_drift = self.max_drift,
+                               snr = self.snr,
+                               out_dir = self.out_dir)
+                               # flagging=False,
+                               # obs_info=None,
+                               # append_output=False,
+                               # blank_dc=True,
+                               # kernels=None,
+                               # gpu_backend=False,
+                               # precision=1,
+                               # gpu_id=0)
         print("Clancy is looking for ET...")
         clancy.find_ET(spectra)
         print("Clancy is done.")
