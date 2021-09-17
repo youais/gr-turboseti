@@ -25,7 +25,7 @@ import datetime as dt
 import time
 
 from gnuradio import gr
-from turboseti_stream.turboseti_stream import DopplerFinder
+from turboseti_stream.doppler_finder import DopplerFinder
 
 DEBUGGING = True
 
