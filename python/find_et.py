@@ -106,7 +106,7 @@ class find_et(gr.sync_block):
 
         print("Initialising Clancy...")
 
-        tstart_utc = str(time.time())
+        tstart_utc = time.time()
         # tstart_local = str(dt.date.today()) + "_" + str(dt.datetime.now().time())
 
         # obs_info = {'pulsar': 0, 'pulsar_found': 0, 'pulsar_dm': 0.0, 'pulsar_snr': 0.0,
@@ -114,7 +114,7 @@ class find_et(gr.sync_block):
         #                'Mean_SEFD': 0.0, 'psrflux_Sens': 0.0,
         #                'SEFDs_val': [0.0], 'SEFDs_freq': [0.0], 'SEFDs_freq_up': [0.0]}
 
-        filename = self.source_name + "_" + tstart_utc
+        filename = self.source_name + "_" + str(tstart_utc)
         if DEBUGGING:
             print("DEBUG Filename:", filename)
 
