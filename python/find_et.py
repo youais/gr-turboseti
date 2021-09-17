@@ -126,7 +126,7 @@ class find_et(gr.sync_block):
                                tsamp = self.tsamp,
                                f_start = self.f_start,
                                f_stop = self.f_stop,
-                               n_fine_chans = elf.n_fine_chans,
+                               n_fine_chans = self.n_fine_chans,
                                n_ints_in_file = self.n_ints_in_file,
                                log_level_int = self.log_level_int,
                                coarse_chan = self.coarse_chan,
