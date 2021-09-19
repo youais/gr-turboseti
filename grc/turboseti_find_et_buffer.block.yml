@@ -1,5 +1,5 @@
 id: turboseti_find_et_buffer
-label: DopplerFinder Buffer
+label: findET Buffer
 category: '[turboSETI]'
 
 #  Make one 'parameters' list entry for every Parameter you want settable from the GUI.

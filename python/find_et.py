@@ -89,7 +89,7 @@ class find_et(gr.sync_block):
         # self.gpu_id = gpu_id
 
         gr.sync_block.__init__(self,
-            name="DopplerFinder",
+            name="find_et",
             in_sig=[(np.float32, self.n_fine_chans)],
             out_sig=None)
 
@@ -97,7 +97,7 @@ class find_et(gr.sync_block):
     def work(self, input_items, output_items):
 
         if DEBUGGING:
-            print("DEBUG DopplerFinder input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
+            print("DEBUG findET input_items[0] shape:", input_items[0].shape) #Checks input is expected shape (60, 1e6)
 
         spectra = input_items[0]
         if DEBUGGING:
@@ -146,5 +146,7 @@ class find_et(gr.sync_block):
         print("Clancy is looking for ET...")
         clancy.find_ET(spectra)
         print("Clancy is done.")
+
+        # Insert a way to plot hits
 
         return len(spectra)

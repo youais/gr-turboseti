@@ -1,5 +1,5 @@
 id: turboseti_find_et
-label: DopplerFinder
+label: findET
 category: '[turboSETI]'
 
 #  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
@@ -9,9 +9,9 @@ category: '[turboSETI]'
 #     * dtype
 parameters:
 - id: filename
-  label: File name
+  label: Channel name
   dtype: string
-#  default: 'CH1'
+  default: 'CH1'
 - id: out_dir
   label: Output directory
   dtype: string
@@ -41,7 +41,7 @@ parameters:
   label: Final freq (MHz)
   dtype: float
 - id: coarse_chan
-  label: Coarse channel no.
+  label: Coarse channel no. to search
   dtype: int
   default: '0'
   category: Channels
