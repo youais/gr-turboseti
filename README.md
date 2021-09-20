@@ -1,13 +1,13 @@
 # A turboSETI block for GNU Radio
 
-This is a GNU Radio Out of Tree (OOT) module for the `DopplerFinder` blocks. The aim is to create a GNU Radio block that can perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM.
+This is a GNU Radio Out of Tree (OOT) module for the `findET` blocks. The aim is to create a GNU Radio block that can perform turboSETI analysis on a `numpy.float32` data matrix stored in RAM.
 
 The module currently consists of 3 blocks:
-- [DopplerFinder](https://github.com/youais/gr-turboseti/blob/master/python/find_et.py)
-- [DopplerFinder Buffer](https://github.com/youais/gr-turboseti/blob/master/python/find_et_buffer.py)
-- [DopplerFinder Sink](https://github.com/youais/gr-turboseti/blob/master/python/find_et_sync.py)
+- [findET](https://github.com/youais/gr-turboseti/blob/master/python/find_et.py)
+- [findET Buffer](https://github.com/youais/gr-turboseti/blob/master/python/find_et_buffer.py)
+- [findET Sink](https://github.com/youais/gr-turboseti/blob/master/python/find_et_sync.py)
 
-The `DopplerFinder Sink` block seeks to combine the functions of both `DopplerFinder Buffer` and `DopplerFinder`. For a good example of the intended output of `DopplerFinder Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py). 
+The `findET Sink` block seeks to combine the functions of both `findET Buffer` and `findET`. For a good example of the intended output of `findET Sink`, refer to [`turboseti_multiprocessing_test.py`](https://github.com/youais/gr-turboseti/blob/master/examples/turboseti_multiprocessing_test.py). 
 
 This code has been tested on a Linux installation of GNU Radio version 3.8.
 
@@ -56,29 +56,32 @@ Currently, the existing data-processing pipeline for the ATA uses custom hardwar
 
 The GNU Radio SETI pipeline is outlined as follows:
 1. Radio telescope data from the ATA streams in through a USRP source
-2. The data is 'channelised' through a polyphase filterbank, followed by a Fast Fourier Transform (FFT). This creates a high-spectral resolution product on the order of ~1MHz
-3. This product accumulates in DopplerFinder Buffer for ~60s, to create a data matrix of shape (60, 1e6)
-4. The data matrix is then passed to DopplerFinder, which uses an adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) to analyses it for potential technosignatures
+2. The data is 'channelised' through a polyphase filterbank (PFB), followed by a Fast Fourier Transform (FFT). This creates a high-spectral resolution product on the order of ~1MHz
+3. This product accumulates in findET Buffer for ~60s, to create a data matrix of shape (60, 1e6)
+4. The data matrix is then passed to findET, which uses an adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) to analyses it for potential technosignatures
 
 Example flowgraph (refer to examples folder for .grc file):
 ![flowgraph](https://user-images.githubusercontent.com/54188486/132890991-4e16bc41-c3ff-425e-a8e3-f010319d4c48.jpg)
 
 
-### Outcome (as of September 10, 2021)
+### Outcome (as of September 19, 2021)
 
 Working:
-- `DopplerFinder` block
-- `DopplerFinder Buffer` block
+- `findET` block
+- `findET Buffer` block
+- 1 channel USRP/File Source flowgraph up to 1 MHz sample rate
+- 4 channel USRP/File Source flowgraph up to 2 MHz sample rate
 
 Issues:
-- `DopplerFinder Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`.
+- `findET Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`
 
-### Next Steps
+### Future Work
 
-1. _Optional: Automate plotting of dynamic spectra of hits_
-2. Observe known technosignature source (e.g. Chang'e 5) using the GNU Radio SETI pipeline
-3. Turn `gr-turboseti` into PyPi package
-4. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
+1. Automate plotting of dynamic spectra of hits (adapt turboSETI's `find_event_pipeline` and `plot_event_pipeline` functions)
+2. Increase maximum sample rate at which the flowgraphs can run (using multiprocessing?)
+3. Observe known technosignature source (e.g. Chang'e 5) with the ATA using the GNU Radio SETI pipeline
+4. Turn `gr-turboseti` into PyPi package
+5. Begin ATA observations of interesting stars using the GNU Radio SETI pipeline
 
 I plan to continue working on this project into the academic year.
 
