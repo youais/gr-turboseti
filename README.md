@@ -71,7 +71,7 @@ Working:
 - `findET` block
 - `findET Buffer` block
 - 1 channel USRP/File Source flowgraph up to 1 MHz sample rate
-- 4 channel USRP/File Source flowgraph up to 2 MHz sample rate
+- 4 channel USRP/File Source flowgraph up to 4 MHz sample rate
 
 Issues:
 - `findET Sink` block -- current issue: `TypeError: cannot pickle 'SwigPyObject' object`
