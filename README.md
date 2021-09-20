@@ -61,7 +61,8 @@ The GNU Radio SETI pipeline is outlined as follows:
 4. The data matrix is then passed to findET, which uses an adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) to analyses it for potential technosignatures
 
 Example flowgraph (refer to examples folder for .grc file):
-![flowgraph](https://user-images.githubusercontent.com/54188486/132890991-4e16bc41-c3ff-425e-a8e3-f010319d4c48.jpg)
+![ts_1chn_filesrc_ex](https://user-images.githubusercontent.com/54188486/134052409-abc0caf0-8d9a-4973-b642-cd8f5d6db0f4.jpg)
+
 
 
 ### Outcome (as of September 19, 2021)
