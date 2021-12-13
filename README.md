@@ -56,7 +56,7 @@ Currently, the existing data-processing pipeline for the ATA uses custom hardwar
 
 The GNU Radio SETI pipeline is outlined as follows:
 1. Radio telescope data from the ATA streams in through a USRP source
-2. The data is 'channelised' through a polyphase filterbank (PFB), followed by a Fast Fourier Transform (FFT). This creates a high-spectral resolution product on the order of ~1MHz
+2. The data is 'channelised' through a polyphase filterbank (PFB), followed by a Fast Fourier Transform (FFT). This creates a high-resolution spectral product on the order of ~1MHz
 3. This product accumulates in findET Buffer for ~60s, to create a data matrix of shape (60, 1e6)
 4. The data matrix is then passed to findET, which uses an adapted version of turboSETI (i.e. [turboseti_stream](https://github.com/luigifcruz/turboseti-stream/blob/main/main.py)) to analyses it for potential technosignatures
 
